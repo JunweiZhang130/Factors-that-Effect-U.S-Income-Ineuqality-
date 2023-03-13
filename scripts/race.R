@@ -30,6 +30,6 @@ income_race_data <- income_race_data %>%
   summarize(freq = n())
 
 # save the data frame as a csv file
-write.csv(subset_data_freq, file = here::here("outputs/data/race_income.csv"), row.names = TRUE)
+write.csv(income_race_data, file = here::here("outputs/data/race_income.csv"), row.names = TRUE)
 
 

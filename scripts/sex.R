@@ -1,26 +1,33 @@
 #### Preamble ####
-# Purpose: Cleans.... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Data: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
-# License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Purpose: data cleaning for sex
+# Author: Rae Zhang, Faustine Fan, Myra Li
+# Data: 11 March 2023 
+# Contact: junwei.zhang@mail.utoronto.ca/yx.fan@mail.utoronto.ca/myra.li@mail.utoronto.ca
 
 
-#### Workspace setup ####
+
+# Loading in relevant libraries
 library(tidyverse)
-# [...UPDATE THIS...]
+library(dplyr, warn.conflicts = FALSE)
+library(tidyr)
+library(readxl)
+library(data.table)
+library(lubridate)
+library(haven)
+library(readxl)
+library(ggplot2)
+library(reshape2)
 
-#### Clean data ####
-# [...UPDATE THIS...]
-raw_data <- read_csv("inputs/data/raw_data.csv")
+# Input data
+raw_data_2018<-read.csv(here::here("outputs/data/preparation/GSS2018.csv"))
 
+# extract the income and race columns
+income_sex_data <- raw_data_2018[, c("sex", "income")]
 
+# calculate the number of income based on race
+income_sex_data <- income_sex_data %>%
+  group_by(sex, income) %>%
+  summarize(freq = n())
 
-
-#### Save data ####
-# [...UPDATE THIS...]
-# change cleaned_data to whatever name you end up with at the end of cleaning
-write_csv(cleaned_data, "outputs/data/cleaned_data.csv")
-
+# save the data frame as a csv file
+write.csv(income_sex_data, file = here::here("outputs/data/sex_income.csv"), row.names = TRUE)
