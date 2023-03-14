@@ -30,6 +30,6 @@ income_eduyear_data <- income_eduyear_data %>%
   summarize(freq = n())
 
 # save the data frame as a csv file
-write.csv(income_eduyear_data, file = here::here("outputs/data/income_eduyear_data.csv"), row.names = TRUE)
+write.csv(income_eduyear_data, file = here::here("outputs/data/eduyear_income_data.csv"), row.names = TRUE)
 
 

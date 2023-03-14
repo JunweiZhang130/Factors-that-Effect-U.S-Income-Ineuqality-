@@ -29,49 +29,52 @@ library(haven)
 library(readxl)
 library(ggplot2)
 ### Input data ###
-income_race<-read.csv(here::here("outputs/data/race_income_data.csv"))
+income_race<-read.csv(here::here("outputs/data/race_income.csv"))
+income_sex<-read.csv(here::here("outputs/data/sex_income.csv"))
+```
 
-ggplot(subset_data_freq, aes(x = income, y = freq, fill = race)) +
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-raceincome
+#| fig-cap: "U.S. Income Distribution by Race"
+
+# Make sure the order of the income level is the order we wanted
+income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
+income_race$income <- 
+  factor(income_race$income, 
+         levels = income_label)
+
+#generate graph#
+ggplot(income_race, aes(x = income, y = the_number_of_people, fill = race)) +
   geom_bar(stat = "identity", position = position_dodge()) +
-  scale_x_discrete(labels = c("LT $1000","", "$1000 TO 2999","", "$3000 TO 3999","",
-                              "$4000 TO 4999","", "$5000 TO 5999","","$6000 TO 6999", "",
-                              "$7000 TO 7999","","$8000 TO 9999","","$10000 - 14999","",
-                              "$15000 - 19999","","$20000 - 24999","","$25000 OR MORE")) +
-  labs(y = "Numbers of people", title = "Numbers of people of Income by race") +
+  labs(x = "Income level", y = "Numbers of people", title = "U.S. Income Distribution by Race") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))
-
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8))
 
 ```
 
 ```{r}
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(warning = FALSE)
-knitr::opts_chunk$set(message = FALSE)
-knitr::opts_chunk$set(fig.width=6.5, fig.height=2.8) 
-# loading in relevant libraries
-library(tidyverse)
-library(dplyr, warn.conflicts = FALSE)
-library(tidyr)
-library(readxl)
-library(data.table)
-library(lubridate)
-library(haven)
-library(readxl)
-library(ggplot2)
-### Input data ###
-income_race<-read.csv(here::here("outputs/data/race_income_data.csv"))
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-raceincome
+#| fig-cap: "U.S. Income Distribution by Sex"
 
-ggplot(subset_data_freq, aes(x = income, y = freq, fill = edu_year)) +
+# Make sure the order of the income level is the order we wanted
+income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
+income_sex$income <- 
+  factor(income_sex$income, 
+         levels = income_label)
+
+#generate graph#
+ggplot(income_sex, aes(x = income, y = the_number_of_people, fill = sex)) +
   geom_bar(stat = "identity", position = position_dodge()) +
-  scale_x_discrete(labels = c("LT $1000","", "$1000 TO 2999","", "$3000 TO 3999","",
-                              "$4000 TO 4999","", "$5000 TO 5999","","$6000 TO 6999", "",
-                              "$7000 TO 7999","","$8000 TO 9999","","$10000 - 14999","",
-                              "$15000 - 19999","","$20000 - 24999","","$25000 OR MORE")) +
-  labs(y = "Numbers of people", title = "Numbers of people of Income by race") +
+  labs(x = "Income level", y = "Numbers of people", title = "U.S. Income Distribution by Sex") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))
-
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8))
 
 
 ```
