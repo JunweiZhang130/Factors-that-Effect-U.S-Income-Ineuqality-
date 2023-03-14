@@ -25,23 +25,13 @@ raw_data_2018<-read_dta(here::here("inputs/data/GSS2018.dta"))
 data_2014 <-
   raw_data_2014 |>
   select(
-    id,
-    educ,
-    majorcol,
-    rincome,
-    race,
-    sex
+    rincome
   )
 
 data_2016 <-
   raw_data_2016 |>
   select(
-    id,
-    educ,
-    majorcol,
-    rincome,
-    race,
-    sex
+    rincome
   )
 
 data_2018 <-
@@ -49,10 +39,12 @@ data_2018 <-
   select(
     id,
     educ,
-    majorcol,
+    wrkslf,
+    wrkgovt,
     rincome,
     race,
-    sex
+    sex,
+    colsci
   )
 
 # Delete the line if the value is NA
@@ -61,28 +53,14 @@ data_2016 <- na.omit(data_2016)
 data_2018 <- na.omit(data_2018)
 
 # Rename the column
-data_2014 <-
-  data_2014 |>
-  rename(
-    edu_year = educ,
-    major = majorcol,
-    income = rincome
-  )
-
-data_2016 <-
-  data_2016 |>
-  rename(
-    edu_year = educ,
-    major = majorcol,
-    income = rincome
-  )
-
 data_2018 <-
   data_2018 |>
   rename(
     edu_year = educ,
-    major = majorcol,
-    income = rincome
+    employee_status = wrkslf,
+    income = rincome,
+    industry_sector = wrkgovt,
+    science_course = colsci
   )
 
 # Save data

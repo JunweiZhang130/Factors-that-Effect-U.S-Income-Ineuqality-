@@ -22,14 +22,14 @@ library(reshape2)
 raw_data_2018<-read.csv(here::here("outputs/data/preparation/GSS2018.csv"))
 
 # extract the income and race columns
-income_eduyear_data <- raw_data_2018[, c("edu_year", "income")]
+income_industry_sector_data <- raw_data_2018[, c("industry_sector", "income")]
 
 # calculate the number of income based on race
-income_eduyear_data <- income_eduyear_data %>%
-  group_by(edu_year, income) %>%
+income_industry_sector_data <- income_industry_sector_data %>%
+  group_by(industry_sector, income) %>%
   summarize(freq = n())
 
 # save the data frame as a csv file
-write.csv(income_eduyear_data, file = here::here("outputs/data/income_eduyear_data.csv"), row.names = TRUE)
+write.csv(income_industry_sector_data, file = here::here("outputs/data/income_industry_sector_data.csv"), row.names = TRUE)
 
 
