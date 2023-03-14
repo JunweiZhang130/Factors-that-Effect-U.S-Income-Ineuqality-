@@ -29,6 +29,26 @@ income_eduyear_data <- income_eduyear_data %>%
   group_by(edu_year, income) %>%
   summarize(freq = n())
 
+# rename the column
+income_eduyear_data <-
+  income_eduyear_data |>
+  rename(
+    The_Number_Of_People = freq,
+    EduYear = edu_year,
+    Income = income
+  )
+
+# aggregate the_number_of_people column for each income level
+The_Number_Of_People_Sum <- income_eduyear_data %>%
+  group_by(Income) %>%
+  summarise(total = sum(The_Number_Of_People))
+
+# merge with original data frame to get percentage
+income_eduyear_data_percentage <- income_eduyear_data %>%
+  left_join(The_Number_Of_People_Sum, by = "Income") %>%
+  group_by(EduYear, Income) %>%
+  mutate(Percentage = The_Number_Of_People / total * 100) %>%
+  select(-total)
 # save the data frame as a csv file
 write.csv(income_eduyear_data, file = here::here("outputs/data/eduyear_income_data.csv"), row.names = TRUE)
 

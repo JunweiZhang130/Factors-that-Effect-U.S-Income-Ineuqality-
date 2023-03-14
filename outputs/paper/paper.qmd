@@ -29,9 +29,53 @@ library(haven)
 library(readxl)
 library(ggplot2)
 ### Input data ###
-income_race<-read.csv(here::here("outputs/data/race_income.csv"))
-income_sex<-read.csv(here::here("outputs/data/sex_income.csv"))
+income_sex_data_percentage<-read.csv(here::here("outputs/data/sex_income.csv"))
+income_race_data_percentage<-read.csv(here::here("outputs/data/race_income.csv"))
+income_employee_status_data_percentage<-read.csv(here::here("outputs/data/income_employee_status_data.csv"))
+income_industry_sector_data_percentage<-read.csv(here::here("outputs/data/income_industry_sector_data.csv"))
+income_science_course_data_percentage<-read.csv(here::here("outputs/data/income_science_course_data.csv"))
 ```
+
+# Introduction
+
+You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
+
+
+
+
+
+# Data {#sec-data}
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-raceincome
+#| fig-cap: "U.S. Income Distribution by Sex"
+
+# Make sure the order of the income level is the order we wanted
+income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
+income_sex_data_percentage$Income <- 
+  factor(income_sex_data_percentage$Income, 
+         levels = income_label)
+
+# Manually set fill colors and labels
+fill_colors <- c("Male" = "#9FC69F", "Female" = "#D6BABA")
+
+ggplot(income_sex_data_percentage, aes(x = Income, 
+                                        y = The_Number_Of_People, 
+                                        fill = Sex)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = fill_colors) +
+  labs(x = "Income Level", y = "Total Number of People",
+       title = "U.S. Income Distribution by Sex") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
+            position = position_stack(vjust = 0.5), size = 2) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
+  ylim(0, 420)
+
+
+```
+
 
 
 ```{r}
@@ -43,16 +87,58 @@ income_sex<-read.csv(here::here("outputs/data/sex_income.csv"))
 
 # Make sure the order of the income level is the order we wanted
 income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_race$income <- 
-  factor(income_race$income, 
+income_race_data_percentage$Income <- 
+  factor(income_race_data_percentage$Income, 
          levels = income_label)
 
-#generate graph#
-ggplot(income_race, aes(x = income, y = the_number_of_people, fill = race)) +
-  geom_bar(stat = "identity", position = position_dodge()) +
-  labs(x = "Income level", y = "Numbers of people", title = "U.S. Income Distribution by Race") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8))
+# Manually set fill colors and labels
+fill_colors <- c("White" = "#6B5B95", "Black" = "#ADD8E6", "Others" =  "#F5E5C0")
+fill_labels <- c("White" = "White", "Black" = "Black", "Others" = "Other")
+
+ggplot(income_race_data_percentage, aes(x = Income, 
+                                        y = The_Number_Of_People, 
+                                        fill = Race)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = fill_colors, labels = fill_labels) +
+  labs(x = "Income Level", y = "Total Number of People",
+       title = "U.S. Income Distribution by Race") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
+            position = position_stack(vjust = 0.5), size = 2) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
+  ylim(0, 420)
+
+```
+
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-raceincome
+#| fig-cap: "U.S. Income Distribution by Employee Status"
+
+# Make sure the order of the income level is the order we wanted
+income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
+income_employee_status_data_percentage$Income <- 
+  factor(income_employee_status_data_percentage$Income, 
+         levels = income_label)
+
+# Manually set fill colors and labels
+fill_colors <- c("Self-employed" = "#A38863", "Someone else" = "#ADD8E6")
+
+ggplot(income_employee_status_data_percentage, aes(x = Income, 
+                                        y = The_Number_Of_People, 
+                                        fill = EmployeeStatus)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = fill_colors) +
+  labs(x = "Income Level", y = "Total Number of People",
+       title = "U.S. Income Distribution by Employee Status") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
+            position = position_stack(vjust = 0.5), size = 2) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
+  ylim(0, 420)
 
 ```
 
@@ -61,83 +147,58 @@ ggplot(income_race, aes(x = income, y = the_number_of_people, fill = race)) +
 #| warning: false
 #| echo: false
 #| label: fig-raceincome
-#| fig-cap: "U.S. Income Distribution by Sex"
+#| fig-cap: "U.S. Income Distribution by Industry Sector"
 
 # Make sure the order of the income level is the order we wanted
 income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_sex$income <- 
-  factor(income_sex$income, 
+income_industry_sector_data_percentage$Income <- 
+  factor(income_industry_sector_data_percentage$Income, 
          levels = income_label)
 
-#generate graph#
-ggplot(income_sex, aes(x = income, y = the_number_of_people, fill = sex)) +
-  geom_bar(stat = "identity", position = position_dodge()) +
-  labs(x = "Income level", y = "Numbers of people", title = "U.S. Income Distribution by Sex") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8))
+# Manually set fill colors and labels
+fill_colors <- c("Government" = "#72b7b7", "Private" = "#c84b4b")
 
-
+ggplot(income_industry_sector_data_percentage, aes(x = Income, 
+                                        y = The_Number_Of_People, 
+                                        fill = IndustrySector)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = fill_colors) +
+  labs(x = "Income Level", y = "Total Number of People",
+       title = "U.S. Income Distribution by Industry Sector") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
+            position = position_stack(vjust = 0.5), size = 2) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
+  ylim(0, 420)
 ```
-
-# Introduction
-
-You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
-
-
-
-# Data {#sec-data}
-
-Our data is of penguins (@fig-bills).
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
+#| message: false
+#| warning: false
 #| echo: false
+#| label: fig-raceincome
+#| fig-cap: "U.S. Income Distribution by College Level Science Courses"
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+# Make sure the order of the income level is the order we wanted
+income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
+income_science_course_data_percentage$Income <- 
+  factor(income_science_course_data_percentage$Income, 
+         levels = income_label)
+
+# Manually set fill colors and labels
+fill_colors <- c("Yes" = "#DCE3A8", "No" = "#C8BCE5")
+
+ggplot(income_science_course_data_percentage, aes(x = Income, 
+                                        y = The_Number_Of_People, 
+                                        fill = ScienceCourse)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = fill_colors) +
+  labs(x = "Income Level", y = "Total Number of People",
+       title = "U.S. Income Distribution by College Level Science Courses") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
+            position = position_stack(vjust = 0.5), size = 2) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
+  ylim(0, 420)
 ```
-
-Talk more about it.
-
-Also bills and their average (@fig-billssssss). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work.)
-
-```{r}
-#| label: fig-billssssss
-#| fig-cap: More bills of penguins
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-Talk way more about it. 
-
-
-
-# Model
-
-$$
-Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}
-$$ {#eq-bayes}
-
-@eq-bayes seems useful, eh?
-
-Here's a dumb example of how to use some references: In paper we run our analysis in `R` [@citeR]. We also use the `tidyverse` which was written by @thereferencecanbewhatever If we were interested in baseball data then @citeLahman could be useful. 
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
 
 
 # Results

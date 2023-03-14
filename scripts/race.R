@@ -41,7 +41,7 @@ income_race_data $race <- ifelse(income_race_data $race == 1, race_replacements[
                                  ifelse(income_race_data $race == 2, race_replacements[2], 
                                         race_replacements[3]))
 
-# replace the income level code to White, Black, Others
+# replace the income level code
 income_race_data <- income_race_data %>%
   mutate(income = case_when(
     income == 1 ~ "LT $1000",
@@ -63,10 +63,24 @@ income_race_data <- income_race_data %>%
 income_race_data <-
   income_race_data |>
   rename(
-    the_number_of_people = freq
+    The_Number_Of_People = freq,
+    Race = race,
+    Income = income
   )
 
+# aggregate the_number_of_people column for each income level
+The_Number_Of_People_Sum <- income_race_data %>%
+  group_by(Income) %>%
+  summarise(total = sum(The_Number_Of_People))
+
+# merge with original data frame to get percentage
+income_race_data_percentage <- income_race_data %>%
+  left_join(The_Number_Of_People_Sum, by = "Income") %>%
+  group_by(Race, Income) %>%
+  mutate(Percentage = The_Number_Of_People / total * 100) %>%
+  select(-total)
+
 # save the data frame as a csv file
-write.csv(income_race_data, file = here::here("outputs/data/race_income.csv"), row.names = TRUE)
+write.csv(income_race_data_percentage, file = here::here("outputs/data/race_income.csv"), row.names = TRUE)
 
 
