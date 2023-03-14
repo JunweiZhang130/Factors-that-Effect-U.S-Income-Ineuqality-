@@ -18,7 +18,9 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(warning = FALSE)
 knitr::opts_chunk$set(message = FALSE)
 knitr::opts_chunk$set(fig.width=6.5, fig.height=2.8) 
+
 # loading in relevant libraries
+library(RColorBrewer)
 library(tidyverse)
 library(dplyr, warn.conflicts = FALSE)
 library(tidyr)
@@ -28,13 +30,15 @@ library(lubridate)
 library(haven)
 library(readxl)
 library(ggplot2)
+
 ### Input data ###
-income_percentage<-read.csv(here::here("outputs/data/income_3years.csv"))
-income_sex_data_percentage<-read.csv(here::here("outputs/data/sex_income.csv"))
-income_race_data_percentage<-read.csv(here::here("outputs/data/race_income.csv"))
-income_employee_status_data_percentage<-read.csv(here::here("outputs/data/income_employee_status_data.csv"))
-income_industry_sector_data_percentage<-read.csv(here::here("outputs/data/income_industry_sector_data.csv"))
-income_science_course_data_percentage<-read.csv(here::here("outputs/data/income_science_course_data.csv"))
+income_data_percentage<-read.csv(here::here("outputs/data/income_3years.csv"))
+sex_data<-read.csv(here::here("outputs/data/sex_data.csv"))
+race_data<-read.csv(here::here("outputs/data/race_data.csv"))
+employee_status_data<-read.csv(here::here("outputs/data/employee_status_data.csv"))
+industry_sector_data<-read.csv(here::here("outputs/data/industry_sector_data.csv"))
+science_course_data<-read.csv(here::here("outputs/data/science_course_data.csv"))
+
 ```
 
 # Introduction
@@ -43,67 +47,55 @@ You can and should cross-reference sections and sub-sections. For instance, @sec
 
 
 
-
-
-# Data {#sec-data}
-```{r}
+```{r, fig.height=8}
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-raceincome
+#| label: fig-1
 #| fig-cap: "U.S. Income Distribution from 2014 to 2018"
 
 # Make sure the order of the income level is the order we wanted
 income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_percentage$Income <- 
-  factor(income_percentage$Income, 
-         levels = income_label)
 
-# Manually set fill colors and labels
-fill_colors <- c("2014" = "#6B5B95", "2016" = "#ADD8E6", "2018" =  "#F5E5C0")
+income_data_percentage$Income <- factor(income_data_percentage$Income, levels = income_label)
 
-ggplot(income_percentage, aes(x = Income, 
-                              y = Number, 
-                              fill = Year)) +
+# Define color palette with 3 colors
+fill_colors <- brewer.pal(n = 3, name = "RdYlBu")
+
+# Generate graph
+ggplot(income_data_percentage, aes(x = Income, y = Number, fill = as.factor(Year))) +
   geom_bar(stat = "identity", position = "stack") +
   scale_fill_manual(values = fill_colors) +
-  labs(x = "Income Level", y = "Total Number of People",
-       title = "U.S. Income Distribution by Year") +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = Number + 10), 
-            position = position_stack(vjust = 0.5), size = 2) +
+  labs(x = "Income Level", y = "Total Number of People", title = "U.S. Income Distribution by Year") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = Number + 10), position = position_stack(vjust = 0.5), size = 2) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
-  ylim(0, 420)
+  ylim(0, 2400)
 
 ```
+
+
+# Data {#sec-data}
+
 
 
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-raceincome
+#| label: fig-2
 #| fig-cap: "U.S. Income Distribution by Sex"
 
-# Make sure the order of the income level is the order we wanted
-income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_sex_data_percentage$Income <- 
-  factor(income_sex_data_percentage$Income, 
-         levels = income_label)
+# calculate the percentage of each sex group for each year
+sex_data <- sex_data %>% 
+  group_by(year) %>% 
+  mutate(percentage = 100 * people / sum(people))
 
-# Manually set fill colors and labels
-fill_colors <- c("Male" = "#9FC69F", "Female" = "#D6BABA")
-
-ggplot(income_sex_data_percentage, aes(x = Income, 
-                                        y = The_Number_Of_People, 
-                                        fill = Sex)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_manual(values = fill_colors) +
-  labs(x = "Income Level", y = "Total Number of People",
-       title = "U.S. Income Distribution by Sex") +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
-            position = position_stack(vjust = 0.5), size = 2) +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
-  ylim(0, 420)
+# generate graph
+ggplot(sex_data, aes(x = year, y = people, 
+                                 fill = sex)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0(round(percentage), "%"), y = people + 5), position = position_dodge(width = 1), size = 3) +
+  labs(x = "Year", y = "People", fill = "Sex",title = "sex")
 
 
 ```
@@ -114,30 +106,20 @@ ggplot(income_sex_data_percentage, aes(x = Income,
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-raceincome
+#| label: fig-3
 #| fig-cap: "U.S. Income Distribution by Race"
 
-# Make sure the order of the income level is the order we wanted
-income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_race_data_percentage$Income <- 
-  factor(income_race_data_percentage$Income, 
-         levels = income_label)
+# calculate the percentage of each race group for each year
+race_data <- race_data %>% 
+  group_by(year) %>% 
+  mutate(percentage = 100 * people / sum(people))
 
-# Manually set fill colors and labels
-fill_colors <- c("White" = "#6B5B95", "Black" = "#ADD8E6", "Others" =  "#F5E5C0")
-fill_labels <- c("White" = "White", "Black" = "Black", "Others" = "Other")
-
-ggplot(income_race_data_percentage, aes(x = Income, 
-                                        y = The_Number_Of_People, 
-                                        fill = Race)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_manual(values = fill_colors, labels = fill_labels) +
-  labs(x = "Income Level", y = "Total Number of People",
-       title = "U.S. Income Distribution by Race") +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
-            position = position_stack(vjust = 0.5), size = 2) +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
-  ylim(0, 420)
+# generate graph
+ggplot(race_data, aes(x = year, y = people, 
+                                 fill = race)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0(round(percentage), "%"), y = people + 5), position = position_dodge(width = 2), size = 3) +
+  labs(x = "Year", y = "People", fill = "Race",title = "race")
 
 ```
 
@@ -148,29 +130,20 @@ ggplot(income_race_data_percentage, aes(x = Income,
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-raceincome
+#| label: fig-4
 #| fig-cap: "U.S. Income Distribution by Employee Status"
 
-# Make sure the order of the income level is the order we wanted
-income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_employee_status_data_percentage$Income <- 
-  factor(income_employee_status_data_percentage$Income, 
-         levels = income_label)
+# calculate the percentage of each employee status group for each year
+employee_status_data <- employee_status_data %>% 
+  group_by(year) %>% 
+  mutate(percentage = 100 * people / sum(people))
 
-# Manually set fill colors and labels
-fill_colors <- c("Self-employed" = "#A38863", "Someone else" = "#ADD8E6")
-
-ggplot(income_employee_status_data_percentage, aes(x = Income, 
-                                        y = The_Number_Of_People, 
-                                        fill = EmployeeStatus)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_manual(values = fill_colors) +
-  labs(x = "Income Level", y = "Total Number of People",
-       title = "U.S. Income Distribution by Employee Status") +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
-            position = position_stack(vjust = 0.5), size = 2) +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
-  ylim(0, 420)
+# generate graph
+ggplot(employee_status_data, aes(x = year, y = people, 
+                                 fill = employee_status)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0(round(percentage), "%"), y = people + 5), position = position_dodge(width = 0.9), size = 3) +
+  labs(x = "Year", y = "People", fill = "Employee Status",title = "employee status")
 
 ```
 
@@ -178,58 +151,43 @@ ggplot(income_employee_status_data_percentage, aes(x = Income,
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-raceincome
+#| label: fig-5
 #| fig-cap: "U.S. Income Distribution by Industry Sector"
 
-# Make sure the order of the income level is the order we wanted
-income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_industry_sector_data_percentage$Income <- 
-  factor(income_industry_sector_data_percentage$Income, 
-         levels = income_label)
+# calculate the percentage of each industry sector group for each year
+industry_sector_data <- industry_sector_data %>% 
+  group_by(year) %>% 
+  mutate(percentage = 100 * people / sum(people))
 
-# Manually set fill colors and labels
-fill_colors <- c("Government" = "#72b7b7", "Private" = "#c84b4b")
+# generate graph
+ggplot(industry_sector_data, aes(x = year, y = people, 
+                                 fill = industry_sector)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0(round(percentage), "%"), y = people + 5), position = position_dodge(width = 0.9), size = 3) +
+  labs(x = "Year", y = "People", fill = "Industry Sector",title = "industry sector")
 
-ggplot(income_industry_sector_data_percentage, aes(x = Income, 
-                                        y = The_Number_Of_People, 
-                                        fill = IndustrySector)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_manual(values = fill_colors) +
-  labs(x = "Income Level", y = "Total Number of People",
-       title = "U.S. Income Distribution by Industry Sector") +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
-            position = position_stack(vjust = 0.5), size = 2) +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
-  ylim(0, 420)
+
 ```
 
 ```{r}
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-raceincome
+#| label: fig-6
 #| fig-cap: "U.S. Income Distribution by College Level Science Courses"
 
-# Make sure the order of the income level is the order we wanted
-income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
-income_science_course_data_percentage$Income <- 
-  factor(income_science_course_data_percentage$Income, 
-         levels = income_label)
+# calculate the percentage of taking college level science courses for each year
+science_course_data <- science_course_data %>% 
+  group_by(year) %>% 
+  mutate(percentage = 100 * people / sum(people))
 
-# Manually set fill colors and labels
-fill_colors <- c("Yes" = "#DCE3A8", "No" = "#C8BCE5")
+# generate graph
+ggplot(science_course_data, aes(x = year, y = people, 
+                                 fill = science_course)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0(round(percentage), "%"), y = people + 5), position = position_dodge(width = 0.9), size = 3) +
+  labs(x = "Year", y = "People", fill = "Whether taking science course",title = "Science course")
 
-ggplot(income_science_course_data_percentage, aes(x = Income, 
-                                        y = The_Number_Of_People, 
-                                        fill = ScienceCourse)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_manual(values = fill_colors) +
-  labs(x = "Income Level", y = "Total Number of People",
-       title = "U.S. Income Distribution by College Level Science Courses") +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = The_Number_Of_People + 10), 
-            position = position_stack(vjust = 0.5), size = 2) +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
-  ylim(0, 420)
 ```
 
 

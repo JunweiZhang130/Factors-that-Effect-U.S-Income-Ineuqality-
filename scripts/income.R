@@ -19,26 +19,14 @@ library(reshape2)
 
 # Input data
 income_2018<-read.csv(here::here("outputs/data/preparation/GSS2018.csv")) %>% select(income)
-income_2016<-read.csv(here::here("outputs/data/preparation/GSS2016.csv")) %>% select(rincome)
-income_2014<-read.csv(here::here("outputs/data/preparation/GSS2014.csv")) %>% select(rincome)
-
-# rename the column
-income_2016 <-
-  income_2016|>
-  rename(
-    income = rincome
-  )
-income_2014 <-
-  income_2014|>
-  rename(
-    income = rincome
-  )
+income_2016<-read.csv(here::here("outputs/data/preparation/GSS2016.csv")) %>% select(income)
+income_2014<-read.csv(here::here("outputs/data/preparation/GSS2014.csv")) %>% select(income)
 
 # Combine the data frames and add a column for the file name
 income_data <- bind_rows(
   data.frame(year = "2018", income = income_2018),
-  data.frame(year = "2016", rincome = income_2016),
-  data.frame(year = "2014", rincome = income_2014))
+  data.frame(year = "2016", income = income_2016),
+  data.frame(year = "2014", income = income_2014))
 
 # group by year and income, count the number
 income_data_count <- income_data %>%
@@ -75,13 +63,13 @@ income_data_count <-
 
 # aggregate number column for each income level
 Number_Sum <- income_data_count %>%
-  group_by(Income) %>%
+  group_by(Year) %>%
   summarise(total = sum(Number))
 
 # merge with original data frame to get percentage
 income_data_percentage <- income_data_count %>%
-  left_join(Number_Sum, by = "Income") %>%
-  group_by(Year, Income) %>%
+  left_join(Number_Sum, by = "Year") %>%
+  group_by(Income, Year) %>%
   mutate(Percentage = Number/ total * 100) %>%
   select(-total)
 

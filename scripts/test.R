@@ -1,10 +1,3 @@
-#### Preamble ####
-# Purpose: data cleaning for employee status
-# Author: Rae Zhang, Faustine Fan, Myra Li
-# Data: 11 March 2023 
-# Contact: junwei.zhang@mail.utoronto.ca/yx.fan@mail.utoronto.ca/myra.li@mail.utoronto.ca
-
-# loading in relevant libraries
 library(tidyverse)
 library(dplyr, warn.conflicts = FALSE)
 library(tidyr)
@@ -16,12 +9,12 @@ library(readxl)
 library(ggplot2)
 library(reshape2)
 
-# input data
+# Input data
 raw_data_2018<-read.csv(here::here("outputs/data/preparation/GSS2018.csv")) 
 raw_data_2016<-read.csv(here::here("outputs/data/preparation/GSS2016.csv")) 
 raw_data_2014<-read.csv(here::here("outputs/data/preparation/GSS2014.csv")) 
 
-# extract the income and employee status columns
+# extract the income and race columns
 employee_status_2018 <- raw_data_2018[, c("employee_status", "income")]
 employee_status_2016 <- raw_data_2016[, c("employee_status", "income")]
 employee_status_2014 <- raw_data_2014[, c("employee_status", "income")]
@@ -38,15 +31,10 @@ employee_status_data <- bind_rows(
 employee_status_data <- income_data %>% 
   filter(income == 12) %>% 
   group_by(employee_status, year) %>% 
-  summarize(people = n())
+  summarize(freq = n())
 
 # replace the employee status code 
 employee_status_replacements <- c("Self-employed", "Someone else")
 employee_status_data$employee_status <- ifelse(employee_status_data$employee_status == 1, 
-                                               employee_status_replacements[1],
-                                               employee_status_replacements[2])
-
-# save the data frame as a csv file
-write.csv(employee_status_data, file = here::here("outputs/data/employee_status_data.csv"), row.names = TRUE)
-
-
+                                                      employee_status_replacements[1],
+                                                      employee_status_replacements[2])

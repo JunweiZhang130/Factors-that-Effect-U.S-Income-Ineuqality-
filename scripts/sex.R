@@ -17,64 +17,35 @@ library(readxl)
 library(ggplot2)
 library(reshape2)
 
-# Input data
-raw_data_2018<-read.csv(here::here("outputs/data/preparation/GSS2018.csv"))
+# input data
+raw_data_2018<-read.csv(here::here("outputs/data/preparation/GSS2018.csv")) 
+raw_data_2016<-read.csv(here::here("outputs/data/preparation/GSS2016.csv")) 
+raw_data_2014<-read.csv(here::here("outputs/data/preparation/GSS2014.csv")) 
 
-# extract the income and race columns
-income_sex_data <- raw_data_2018[, c("sex", "income")]
+# extract the income and sex columns
+sex_2018 <- raw_data_2018[, c("sex", "income")]
+sex_2016 <- raw_data_2016[, c("sex", "income")]
+sex_2014 <- raw_data_2014[, c("sex", "income")]
 
-# calculate the number of income based on race
-income_sex_data <- income_sex_data %>%
-  group_by(sex, income) %>%
-  summarize(freq = n())
+# combine three files into one
+sex_data <- bind_rows(
+  sex_2018 %>% mutate(year = "2018"),
+  sex_2016 %>% mutate(year = "2016"),
+  sex_2014 %>% mutate(year = "2014")
+)
 
-# add one empty rows for male income level 6, and black income level 6 to keep consistent
-new_row <- data.frame(sex = 1, income = 6, freq = 0)
-income_sex_data <- dplyr::bind_rows(income_sex_data[1:5,], new_row, income_sex_data[6:nrow(income_sex_data),])
+# only keep the income level 12
+# calcualte the number of each sex by year
+sex_data <- sex_data %>% 
+  filter(income == 12) %>% 
+  group_by(sex, year) %>% 
+  summarize(people = n())
 
-# replace the sex code to Male and Female 
+# replace the sex code 
 sex_replacements <- c("Male", "Female")
-income_sex_data$sex <- ifelse(income_sex_data$sex == 1, sex_replacements[1],
-                                sex_replacements[2])
-
-# replace the income level code
-income_sex_data <- income_sex_data %>%
-  mutate(income = case_when(
-    income == 1 ~ "LT $1000",
-    income == 2 ~ "$1000 TO 2999",
-    income == 3 ~ "$3000 TO 3999",
-    income == 4 ~ "$4000 TO 4999",
-    income == 5 ~ "$5000 TO 5999",
-    income == 6 ~ "$6000 TO 6999",
-    income == 7 ~ "$7000 TO 7999",
-    income == 8 ~ "$8000 TO 9999",
-    income == 9 ~ "$10000 - 14999",
-    income == 10 ~ "$15000 - 19999",
-    income == 11 ~ "$20000 - 24999",
-    income == 12 ~ "$25000 OR MORE",
-    TRUE ~ as.character(income)
-  ))
-
-# rename the column
-income_sex_data <-
-  income_sex_data |>
-  rename(
-    The_Number_Of_People = freq,
-    Sex = sex,
-    Income = income
-  )
-
-# aggregate the_number_of_people column for each income level
-The_Number_Of_People_Sum <- income_sex_data %>%
-  group_by(Income) %>%
-  summarise(total = sum(The_Number_Of_People))
-
-# merge with original data frame to get percentage
-income_sex_data_percentage <- income_sex_data %>%
-  left_join(The_Number_Of_People_Sum, by = "Income") %>%
-  group_by(Sex, Income) %>%
-  mutate(Percentage = The_Number_Of_People / total * 100) %>%
-  select(-total)
+sex_data$sex <- ifelse(sex_data$sex == 1, 
+                       sex_replacements[1],
+                       sex_replacements[2])
 
 # save the data frame as a csv file
-write.csv(income_sex_data_percentage, file = here::here("outputs/data/sex_income.csv"), row.names = TRUE)
+write.csv(sex_data, file = here::here("outputs/data/sex_data.csv"), row.names = TRUE)

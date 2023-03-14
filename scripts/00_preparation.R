@@ -25,13 +25,27 @@ raw_data_2018<-read_dta(here::here("inputs/data/GSS2018.dta"))
 data_2014 <-
   raw_data_2014 |>
   select(
-    rincome
+    id,
+    educ,
+    wrkslf,
+    wrkgovt,
+    rincome,
+    race,
+    sex,
+    colsci
   )
 
 data_2016 <-
   raw_data_2016 |>
   select(
-    rincome
+    id,
+    educ,
+    wrkslf,
+    wrkgovt,
+    rincome,
+    race,
+    sex,
+    colsci
   )
 
 data_2018 <-
@@ -53,6 +67,26 @@ data_2016 <- na.omit(data_2016)
 data_2018 <- na.omit(data_2018)
 
 # Rename the column
+data_2016 <-
+  data_2016|>
+  rename(
+    edu_year = educ,
+    employee_status = wrkslf,
+    income = rincome,
+    industry_sector = wrkgovt,
+    science_course = colsci
+  )
+
+data_2014 <-
+  data_2014|>
+  rename(
+    edu_year = educ,
+    employee_status = wrkslf,
+    income = rincome,
+    industry_sector = wrkgovt,
+    science_course = colsci
+  )
+
 data_2018 <-
   data_2018 |>
   rename(
