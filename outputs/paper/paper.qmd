@@ -29,6 +29,7 @@ library(haven)
 library(readxl)
 library(ggplot2)
 ### Input data ###
+income_percentage<-read.csv(here::here("outputs/data/income_3years.csv"))
 income_sex_data_percentage<-read.csv(here::here("outputs/data/sex_income.csv"))
 income_race_data_percentage<-read.csv(here::here("outputs/data/race_income.csv"))
 income_employee_status_data_percentage<-read.csv(here::here("outputs/data/income_employee_status_data.csv"))
@@ -45,6 +46,37 @@ You can and should cross-reference sections and sub-sections. For instance, @sec
 
 
 # Data {#sec-data}
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-raceincome
+#| fig-cap: "U.S. Income Distribution from 2014 to 2018"
+
+# Make sure the order of the income level is the order we wanted
+income_label <- c("LT $1000", "$1000 TO 2999", "$3000 TO 3999", "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999", "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999", "$15000 - 19999", "$20000 - 24999", "$25000 OR MORE")
+income_percentage$Income <- 
+  factor(income_percentage$Income, 
+         levels = income_label)
+
+# Manually set fill colors and labels
+fill_colors <- c("2014" = "#6B5B95", "2016" = "#ADD8E6", "2018" =  "#F5E5C0")
+
+ggplot(income_percentage, aes(x = Income, 
+                              y = Number, 
+                              fill = Year)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = fill_colors) +
+  labs(x = "Income Level", y = "Total Number of People",
+       title = "U.S. Income Distribution by Year") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%"), y = Number + 10), 
+            position = position_stack(vjust = 0.5), size = 2) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 8)) +
+  ylim(0, 420)
+
+```
+
+
 ```{r}
 #| message: false
 #| warning: false

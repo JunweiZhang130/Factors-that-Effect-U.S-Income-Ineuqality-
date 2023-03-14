@@ -5,7 +5,6 @@
 # Contact: junwei.zhang@mail.utoronto.ca/yx.fan@mail.utoronto.ca/myra.li@mail.utoronto.ca
 
 
-
 # Loading in relevant libraries
 library(tidyverse)
 library(dplyr, warn.conflicts = FALSE)
@@ -49,7 +48,8 @@ income_eduyear_data_percentage <- income_eduyear_data %>%
   group_by(EduYear, Income) %>%
   mutate(Percentage = The_Number_Of_People / total * 100) %>%
   select(-total)
+
 # save the data frame as a csv file
-write.csv(income_eduyear_data, file = here::here("outputs/data/eduyear_income_data.csv"), row.names = TRUE)
+write.csv(income_eduyear_data_percentage, file = here::here("outputs/data/eduyear_income_data.csv"), row.names = TRUE)
 
 

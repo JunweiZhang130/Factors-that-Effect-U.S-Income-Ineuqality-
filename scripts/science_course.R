@@ -1,9 +1,8 @@
 #### Preamble ####
-# Purpose: data cleaning for education
+# Purpose: data cleaning for college science course
 # Author: Rae Zhang, Faustine Fan, Myra Li
 # Data: 11 March 2023 
 # Contact: junwei.zhang@mail.utoronto.ca/yx.fan@mail.utoronto.ca/myra.li@mail.utoronto.ca
-
 
 
 # Loading in relevant libraries

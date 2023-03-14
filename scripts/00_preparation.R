@@ -2,7 +2,7 @@
 # Purpose: Preparation for further data cleaning.
 # Author: Rae Zhang, Faustine Fan, Myra Li
 # Data: 11 March 2023 
-# Contact: myra.li@mail.utoronto.ca/yx.fan@mail.utoronto.ca
+# Contact: junwei.zhang@mail.utoronto.ca/yx.fan@mail.utoronto.ca/myra.li@mail.utoronto.ca
 
 
 # Loading in relevant libraries
