@@ -21,7 +21,7 @@ You can and should cross-reference sections and sub-sections. For instance, @sec
 
 # Methodology
 
-```{r setup, include=FALSE}}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(warning = FALSE)
 knitr::opts_chunk$set(message = FALSE)
@@ -46,7 +46,6 @@ race_data<-read.csv(here::here("outputs/data/race_data.csv"))
 degree_data<-read.csv(here::here("outputs/data/degree_data.csv"))
 employee_status_data<-read.csv(here::here("outputs/data/employee_status_data.csv"))
 marital_status_data<-read.csv(here::here("outputs/data/marital_status_data.csv"))
-
 
 ```
 
