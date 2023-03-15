@@ -1,1 +1,1 @@
-# Factors-that-Effect-U.S-Income-Ineuqality-
+# Happiness in America: A Comprehensive Analysis of the Effects of Demographic Factors
