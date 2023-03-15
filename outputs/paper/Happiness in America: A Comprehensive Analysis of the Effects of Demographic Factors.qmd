@@ -65,7 +65,7 @@ ggplot(happiness_data, aes(x = Year, y = People, fill = Happy)) +
   scale_fill_manual(values = happy_colors) +
   scale_color_manual(values = happy_colors) +
   labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
-       title = "Changes in happiness levels from 1972 to 2021",
+       title = "Fig1-Changes in happiness levels from 1972 to 2021",
        color = "Happy level")
 
 ```
@@ -92,7 +92,7 @@ ggplot(sex_data_happy1, aes(x = Year, y = People, fill = Sex)) +
   geom_line(aes(group = Sex, color = Sex), size = 1.2) +
   scale_fill_manual(values = sex_colors) +
   scale_color_manual(values = sex_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Trends in happiness level (very happy) by gender from 1972 to 2021")
+  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Fig2-Trends in happiness level (very happy) by gender from 1972 to 2021")
 
 ```
 ```{r}
@@ -115,7 +115,7 @@ ggplot(sex_data_happy2, aes(x = Year, y = People, fill = Sex)) +
   geom_line(aes(group = Sex, color = Sex), size = 1.2) +
   scale_fill_manual(values = sex_colors) +
   scale_color_manual(values = sex_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Trends in happiness level (pretty happy) by gender from 1972 to 2021")
+  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Fig3-Trends in happiness level (pretty happy) by gender from 1972 to 2021")
 
 ```
 
@@ -139,7 +139,7 @@ ggplot(sex_data_happy3, aes(x = Year, y = People, fill = Sex)) +
   geom_line(aes(group = Sex, color = Sex), size = 1.2) +
   scale_fill_manual(values = sex_colors) +
   scale_color_manual(values = sex_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Trends in happiness level (not too happy) by gender from 1972 to 2021")
+  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Fig4-Trends in happiness level (not too happy) by gender from 1972 to 2021")
 
 ```
 
@@ -163,7 +163,7 @@ ggplot(race_data_happy1, aes(x = Year, y = People, fill = Race)) +
   geom_line(aes(group = Race, color = Race), size = 1.2) +
   scale_fill_manual(values = race_colors) +
   scale_color_manual(values = race_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Trends in happiness level (very happy) by race from 1972 to 2021")
+  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Fig5-Trends in happiness level (very happy) by race from 1972 to 2021")
 
 ```
 
@@ -187,7 +187,7 @@ ggplot(race_data_happy2, aes(x = Year, y = People, fill = Race)) +
   geom_line(aes(group = Race, color = Race), size = 1.2) +
   scale_fill_manual(values = race_colors) +
   scale_color_manual(values = race_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Trends in happiness level (pretty happy) by race from 1972 to 2021")
+  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Fig6-Trends in happiness level (pretty happy) by race from 1972 to 2021")
 
 ```
 
@@ -213,7 +213,7 @@ ggplot(race_data_happy3, aes(x = Year, y = People, fill = Race)) +
   geom_line(aes(group = Race, color = Race), size = 1.2) +
   scale_fill_manual(values = race_colors) +
   scale_color_manual(values = race_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Trends in happiness level (not too happy) by race from 1972 to 2021")
+  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Fig7-Trends in happiness level (not too happy) by race from 1972 to 2021")
 
 ```
 
@@ -241,7 +241,7 @@ ggplot(degree_data_1, aes(x = Year, y = People, fill = Happy)) +
   geom_line(aes(group = Happy, color = Happy), size = 1.2) +
   scale_fill_manual(values = degree_colors) +
   scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Changes in happiness levels of individuals \nwith less than high school education from 1972 to 2021", color = "Happy level")
+  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig8-Changes in happiness levels of individuals \nwith less than high school education from 1972 to 2021", color = "Happy level")
 
 ```
 ```{r}
@@ -264,9 +264,11 @@ ggplot(degree_data_2, aes(x = Year, y = People, fill = Happy)) +
   geom_line(aes(group = Happy, color = Happy), size = 1.2) +
   scale_fill_manual(values = degree_colors) +
   scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Changes in happiness levels of individuals \nwith high school education from 1972 to 2021", color = "Happy level")
+  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig9-Changes in happiness levels of individuals \nwith high school education from 1972 to 2021", color = "Happy level")
 
 ```
+
+
 ```{r}
 #| message: false
 #| warning: false
@@ -287,7 +289,7 @@ ggplot(degree_data_3, aes(x = Year, y = People, fill = Happy)) +
   geom_line(aes(group = Happy, color = Happy), size = 1.2) +
   scale_fill_manual(values = degree_colors) +
   scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Changes in happiness levels of individuals \nwith associate/junior college education from 1972 to 2021", color = "Happy level")
+  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig10-Changes in happiness levels of individuals \nwith associate/junior college education from 1972 to 2021", color = "Happy level")
 ```
 
 ```{r}
@@ -310,7 +312,7 @@ ggplot(degree_data_4, aes(x = Year, y = People, fill = Happy)) +
   geom_line(aes(group = Happy, color = Happy), size = 1.2) +
   scale_fill_manual(values = degree_colors) +
   scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Changes in happiness levels of individuals \nwith bachelor's education from 1972 to 2021", color = "Happy level")
+  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig11-Changes in happiness levels of individuals \nwith bachelor's education from 1972 to 2021", color = "Happy level")
 
 ```
 
@@ -335,7 +337,7 @@ ggplot(degree_data_5, aes(x = Year, y = People, fill = Happy)) +
   geom_line(aes(group = Happy, color = Happy), size = 1.2) +
   scale_fill_manual(values = degree_colors) +
   scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Changes in happiness levels of individuals \nwith graduate education from 1972 to 2021", color = "Happy level")
+  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig12-Changes in happiness levels of individuals \nwith graduate education from 1972 to 2021", color = "Happy level")
 
 ```
 
@@ -360,7 +362,7 @@ ggplot(employee_status_data_happy1, aes(x = Year, y = People, fill = Employee_st
   geom_line(aes(group = Employee_status, color = Employee_status), size = 1.2) +
   scale_fill_manual(values = employee_status_colors) +
   scale_color_manual(values = employee_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Trends in happiness level (very happy) by employee status from 1972 to 2021", color = "Employee status")
+  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Fig13-Trends in happiness level (very happy) by employee status from 1972 to 2021", color = "Employee status")
 
 ```
 
@@ -384,7 +386,7 @@ ggplot(employee_status_data_happy2, aes(x = Year, y = People, fill = Employee_st
   geom_line(aes(group = Employee_status, color = Employee_status), size = 1.2) +
   scale_fill_manual(values = employee_status_colors) +
   scale_color_manual(values = employee_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Trends in happiness level (pretty happy) by employee status from 1972 to 2021", color = "Employee status")
+  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Fig14-Trends in happiness level (pretty happy) by employee status from 1972 to 2021", color = "Employee status")
 ```
 
 ```{r}
@@ -407,7 +409,7 @@ ggplot(employee_status_data_happy3, aes(x = Year, y = People, fill = Employee_st
   geom_line(aes(group = Employee_status, color = Employee_status), size = 1.2) +
   scale_fill_manual(values = employee_status_colors) +
   scale_color_manual(values = employee_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Trends in happiness level (not too happy) by employee status from 1972 to 2021", color = "Employee status")
+  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Fig15-Trends in happiness level (not too happy) by employee status from 1972 to 2021", color = "Employee status")
 ```
 ```{r}
 #| message: false
@@ -429,7 +431,7 @@ ggplot(marital_status_data_happy1, aes(x = Year, y = People, fill = Marital_stat
   geom_line(aes(group = Marital_status, color = Marital_status), size = 1.2) +
   scale_fill_manual(values = marital_status_colors) +
   scale_color_manual(values = marital_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Trends in happiness level (very happy) by marital status from 1972 to 2021", color = "Marital status")
+  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Fig16-Trends in happiness level (very happy) by marital status from 1972 to 2021", color = "Marital status")
 ```
 ```{r}
 #| message: false
@@ -451,7 +453,7 @@ ggplot(marital_status_data_happy2, aes(x = Year, y = People, fill = Marital_stat
   geom_line(aes(group = Marital_status, color = Marital_status), size = 1.2) +
   scale_fill_manual(values = marital_status_colors) +
   scale_color_manual(values = marital_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Trends in happiness level (pretty happy) by marital status from 1972 to 2021", color = "Marital status")
+  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Fig17-Trends in happiness level (pretty happy) by marital status from 1972 to 2021", color = "Marital status")
 ```
 
 ```{r}
@@ -474,7 +476,7 @@ ggplot(marital_status_data_happy3, aes(x = Year, y = People, fill = Marital_stat
   geom_line(aes(group = Marital_status, color = Marital_status), size = 1.2) +
   scale_fill_manual(values = marital_status_colors) +
   scale_color_manual(values = marital_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Trends in happiness level (not too happy) by marital status from 1972 to 2021", color = "Marital status")
+  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Fig18-Trends in happiness level (not too happy) by marital status from 1972 to 2021", color = "Marital status")
 ```
 
 ```{r}
