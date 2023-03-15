@@ -4,7 +4,8 @@ This repository can be found at https://github.com/JunweiZhang130/Factors-that-E
 
 This repository presents an exploration of the relationship between demographic factors and happiness levels in America. And the data is obtained from the *US General Social Survey*.      
 
-Since we don't have the permission to share the GSS data, you can download the raw data from its original website: https://gss.norc.org/get-the-data/stata. And the data file we used is called *GSS 1972-2021 Cross-Sectional Cumulative Data (Release 3b, February 2023)* under the *Cumulative Data Set (cross-sectional samples from all years)*. Please save the raw data you downloaded in the inputs/data. Then, run the *00preparation.R* in scripts file, this creates the datasets (*raw_data.csv* in the outputs/data).The paper and the graphs are based on our cleaned data, so if you prefer not to review the raw data, that's not a problem.                  
+Since we don't have the permission to share the GSS data, you can download the raw data from its original website: https://gss.norc.org/get-the-data/stata. And the data file we used is called *GSS 1972-2021 Cross-Sectional Cumulative Data (Release 3b, February 2023)* under the *Cumulative Data Set (cross-sectional samples from all years)*. Please save the raw data you downloaded in the inputs/data. Then, run the *00preparation.R* in scripts file, this creates the datasets (*raw_data.csv* in the outputs/data).              
+The paper and the graphs are based on our cleaned data, so if you prefer not to review the raw data, that's not a problem.                  
 
 Then run the *references.bib* file (*outputs/paper*) for references and citations, after that run the *Happiness in America: A Comprehensive Analysis of the Effects of Demographic Factors.qmd* file (outputs/paper).                     
 
