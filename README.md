@@ -1,6 +1,6 @@
 # Happiness in America: A Comprehensive Analysis of the Effects of Demographic Factors
 
-This repository can be found at https://github.com/JunweiZhang130/Factors-that-Effect-U.S-Income-Ineuqality-.git。   
+This repository can be found at https://github.com/JunweiZhang130/Happiness-in-America-A-Comprehensive-Analysis-of-the-Effects-of-Demographic-Factors.git.   
 
 This repository presents an exploration of the relationship between demographic factors and happiness levels in America. And the data is obtained from the *US General Social Survey*.      
 
