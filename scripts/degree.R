@@ -21,7 +21,7 @@ library(reshape2)
 raw_data<-read.csv(here::here("outputs/data/raw_data.csv")) 
 
 # extract the income and race columns
-degree_data <- raw_data[, c("Degree","Happy","Year")]
+degree_data <- raw_data[, c("Degree","Happy_level","Year")]
 
 # replace the degree code 
 degree_replacements <- c("Less than high school", "High school", "Associate/junior college", 

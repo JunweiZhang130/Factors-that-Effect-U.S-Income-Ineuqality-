@@ -20,7 +20,7 @@ library(reshape2)
 raw_data<-read.csv(here::here("outputs/data/raw_data.csv")) 
 
 # extract the income and race columns
-marital_status_data <- raw_data[, c("Marital_status","Happy","Year")]
+marital_status_data <- raw_data[, c("Marital_status","Happy_level","Year")]
 
 
 # replace the degree code 

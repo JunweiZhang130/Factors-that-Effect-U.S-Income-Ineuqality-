@@ -28,7 +28,7 @@ knitr::opts_chunk$set(message = FALSE)
 knitr::opts_chunk$set(fig.width=6.5, fig.height=2.8) 
 
 # loading in relevant libraries
-library(RColorBrewer)
+library(cowplot)
 library(tidyverse)
 library(dplyr, warn.conflicts = FALSE)
 library(tidyr)
@@ -38,6 +38,7 @@ library(lubridate)
 library(haven)
 library(readxl)
 library(ggplot2)
+library(scales)
 
 ### Input data ###
 happiness_data<-read.csv(here::here("outputs/data/happiness_data.csv"))
@@ -60,428 +61,353 @@ marital_status_data<-read.csv(here::here("outputs/data/marital_status_data.csv")
 # generate graph
 happy_colors <- c("#FF7F00", "#1F78B4", "#33A02C")
 
-ggplot(happiness_data, aes(x = Year, y = People, fill = Happy)) +
+fig1 <- ggplot(happiness_data, aes(x = Year, y = People, fill = Happy)) +
   geom_line(aes(group = Happy, color = Happy), size = 1.2) +
   scale_fill_manual(values = happy_colors) +
   scale_color_manual(values = happy_colors) +
   labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
-       title = "Fig1-Changes in happiness levels from 1972 to 2021",
+       color = "Happy level")
+fig1 <- fig1  +
+  draw_label("Trends in happiness levels for different genders from 1972 to 2021", 
+             fontface = "bold", 
+             size = 12,
+             x = 0.5,
+             y = 1.05)
+fig1
+```
+
+```{r, fig.height=6}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-2Gender
+#| fig-cap: "Trends in happiness levels for different genders from 1972 to 2021"
+
+# Only for female
+female_data <- filter(sex_data, Sex == "Female")
+gfemale <- ggplot(female_data, 
+       aes(y = Year, 
+           fill = Happy_level)) + 
+  geom_bar(position = "fill") + 
+  theme_classic() +
+  coord_flip()+
+  labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
+       title = "Female",
        color = "Happy level")
 
+# Only for male
+male_data <- filter(sex_data, Sex == "Male")
+gmale <- ggplot(male_data, 
+       aes(y = Year, 
+           fill = Happy_level)) + 
+  geom_bar(position = "fill") + 
+  theme_classic() +
+  coord_flip()+
+  labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
+       title = "Male",
+       color = "Happy level")
+
+# group graphs together
+fig2 <- plot_grid(gfemale, gmale, ncol = 1,
+          label_size = 12,
+          label_x = 0.05,
+          label_y = 0.9,
+          label_fontface = "bold",
+          hjust = 0)
+
+fig2 <- fig2  +
+  draw_label("Trends in happiness levels for different genders from 1972 to 2021", 
+             fontface = "bold", 
+             size = 16,
+             x = 0.5,
+             y = 1.05)
+fig2
 ```
 
 
 
-```{r}
+```{r, fig.height=8}
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-2VeryHappyGender
-#| fig-cap: "Trends in happiness level (very happy) by gender from 1972 to 2021"
+#| label: fig-3Race
+#| fig-cap: "Trends in happiness levels for different races from 1972 to 2021"
 
-# calculate the count of individuals for very happy level
-sex_data_happy1 <- sex_data %>% 
-  filter(Happy == "Very happy") %>% 
-  group_by(Sex, Year, Happy) %>% 
-  summarize(People = n())
+# Only for white
+white_data <- filter(race_data, Race == "White")
+gwhite <- ggplot(white_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "White people",
+           color = "Happy level")
 
-# generate graph
-sex_colors <- c("#E74C3C", "#2C3E50")
+# Only for black
+black_data <- filter(race_data, Race == "Black")
+gblack <- ggplot(black_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip()+
+      labs(y = "Year", x = "Percentages", fill = "Happy Level", 
+           title = "black people",
+           color = "Happy level")
 
-ggplot(sex_data_happy1, aes(x = Year, y = People, fill = Sex)) +
-  geom_line(aes(group = Sex, color = Sex), size = 1.2) +
-  scale_fill_manual(values = sex_colors) +
-  scale_color_manual(values = sex_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Fig2-Trends in happiness level (very happy) by gender from 1972 to 2021")
+# Only for others
+others_data <- filter(race_data, Race == "Others")
+gothers <- ggplot(others_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "other race",
+           color = "Happy level")
+
+# group graphs together
+fig3 <- plot_grid(gwhite, gblack, gothers, ncol = 1,
+          label_size = 14,
+          label_x = 0.05,
+          label_y = 0.9,
+          label_fontface = "bold",
+          hjust = 0)
+
+fig3 <- fig3  +
+  draw_label("Trends in happiness levels for different races from 1972 to 2021", 
+             fontface = "bold", 
+             size = 16,
+             x = 0.5,
+             y = 1.05)
+fig3
 
 ```
-```{r}
+
+```{r, fig.height=16}
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-3PrettyHappyGender
-#| fig-cap: "Trends in happiness level (pretty happy) by gender from 1972 to 2021"
+#| label: fig-4Degree
+#| fig-cap: "Trends in happiness levels for different degrees from 1972 to 2021"
 
-# calculate the count of individuals for pretty happy level
-sex_data_happy2 <- sex_data %>% 
-  filter(Happy == "Pretty happy") %>% 
-  group_by(Sex, Year, Happy) %>% 
-  summarize(People = n())
+# graph for less than high school
+less_high_school_data <- filter(degree_data, Degree == "Less than high school")
+glesshighschool <- ggplot(less_high_school_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Less than high school",
+           color = "Happy level")
 
-# generate graph
-sex_colors <- c("#E74C3C", "#2C3E50")
+# graph for high school
+high_school_data <- filter(degree_data, Degree == "High school")
+ghighschool <- ggplot(high_school_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "High school",
+           color = "Happy level")
 
-ggplot(sex_data_happy2, aes(x = Year, y = People, fill = Sex)) +
-  geom_line(aes(group = Sex, color = Sex), size = 1.2) +
-  scale_fill_manual(values = sex_colors) +
-  scale_color_manual(values = sex_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Fig3-Trends in happiness level (pretty happy) by gender from 1972 to 2021")
+# graph for associate/junior college
+junior_data <- filter(degree_data, Degree == "Associate/junior college")
+gjunior <- ggplot(junior_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Associate/junior college",
+           color = "Happy level")
 
+# graph for bachelor
+bachelor_data <- filter(degree_data, Degree == "Bachelor's")
+gbachelor <- ggplot(bachelor_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Bachelor",
+           color = "Happy level")
+
+# graph for graduate
+graduate_data <- filter(degree_data, Degree == "Graduate")
+graduate<- ggplot(graduate_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Graduate",
+           color = "Happy level")
+
+# group graphs together
+fig4 <- plot_grid(glesshighschool, ghighschool, gjunior, gbachelor, graduate, ncol = 1,
+          label_size = 14,
+          label_x = 0.05,
+          label_y = 0.9,
+          label_fontface = "bold",
+          hjust = 0)
+
+fig4 <- fig4  +
+  draw_label("Trends in happiness levels for different degrees from 1972 to 2021", 
+             fontface = "bold", 
+             size = 16,
+             x = 0.5,
+             y = 1.05)
+fig4
 ```
 
-```{r}
+
+
+```{r, fig.height=8}
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-4NotTooHappyGender
-#| fig-cap: "Trends in happiness level (not too happy) by gender from 1972 to 2021"
+#| label: fig-5Employee
+#| fig-cap: "Trends in happiness levels for different emoloyee status from 1972 to 2021"
 
-# calculate the count of individuals for not too happy level
-sex_data_happy3 <- sex_data %>% 
-  filter(Happy == "Not too happy") %>% 
-  group_by(Sex, Year, Happy) %>% 
-  summarize(People = n())
+# graph for self-employee
+self_data <- filter(employee_status_data, Employee_status == "Self-employed")
+gself<- ggplot(self_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Self-employed",
+           color = "Happy level")
 
-# generate graph
-sex_colors <- c("#E74C3C", "#2C3E50")
+# graph for someone else
+someone_data <- filter(employee_status_data, Employee_status == "Someone else")
+gsomeone <- ggplot(someone_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Someone else",
+           color = "Happy level")
 
-ggplot(sex_data_happy3, aes(x = Year, y = People, fill = Sex)) +
-  geom_line(aes(group = Sex, color = Sex), size = 1.2) +
-  scale_fill_manual(values = sex_colors) +
-  scale_color_manual(values = sex_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Sex", title = "Fig4-Trends in happiness level (not too happy) by gender from 1972 to 2021")
+# group graphs together
+fig5 <- plot_grid(gself, gsomeone, ncol = 1,
+          label_size = 14,
+          label_x = 0.05,
+          label_y = 0.9,
+          label_fontface = "bold",
+          hjust = 0)
 
+fig5 <- fig5  +
+  draw_label("Trends in happiness levels for different emoloyee status from 1972 to 2021", 
+             fontface = "bold", 
+             size = 16,
+             x = 0.5,
+             y = 1.05)
+fig5
 ```
 
-```{r}
+
+
+
+```{r, fig.height=16}
 #| message: false
 #| warning: false
 #| echo: false
-#| label: fig-5VeryHappyRace
-#| fig-cap: "Trends in happiness level (very happy) by race from 1972 to 2021"
+#| label: fig-6Marital
+#| fig-cap: "Trends in happiness levels for different marital status from 1972 to 2021"
 
-# calculate the count of individuals for very happy level
-race_data_happy1 <- race_data %>% 
-  filter(Happy == "Very happy") %>% 
-  group_by(Race, Year, Happy) %>% 
-  summarize(People = n())
+# graph for married
+married_data <- filter(marital_status_data, Marital_status == "Married")
+gmarried_data <- ggplot(married_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Married",
+           color = "Happy level")
 
-# generate graph
-race_colors <- c("#3498DB", "#27AE60", "#F39C12")
+# graph for widowed
+widowed_data <- filter(marital_status_data, Marital_status == "Widowed")
+gwidowed_data <- ggplot(widowed_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Widowed",
+           color = "Happy level")
 
-ggplot(race_data_happy1, aes(x = Year, y = People, fill = Race)) +
-  geom_line(aes(group = Race, color = Race), size = 1.2) +
-  scale_fill_manual(values = race_colors) +
-  scale_color_manual(values = race_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Fig5-Trends in happiness level (very happy) by race from 1972 to 2021")
+# graph for divorced
+divorced_data <- filter(marital_status_data, Marital_status == "Divorced")
+gdivorced_data <- ggplot(divorced_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Divorced",
+           color = "Happy level")
 
+# graph for separated
+separated_data <- filter(marital_status_data, Marital_status == "Separated")
+gseparated_data <- ggplot(separated_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Separated",
+           color = "Happy level")
+
+# graph for never married
+never_married_data <- filter(marital_status_data, Marital_status == "Never married")
+gnever_married<- ggplot(never_married_data, 
+             aes(y = Year, 
+                 fill = Happy)) + 
+      geom_bar(position = "fill") + 
+      theme_classic() +
+      coord_flip() +
+      labs(y = "Year", x = "Percentage", fill = "Happy Level", 
+           title = "Never married",
+           color = "Happy level")
+
+# group graphs together
+fig6 <- plot_grid(gmarried_data, gnever_married, gwidowed_data, gdivorced_data, gseparated_data, ncol = 1,
+          label_size = 14,
+          label_x = 0.05,
+          label_y = 0.9,
+          label_fontface = "bold",
+          hjust = 0)
+
+fig6 <- fig6  +
+  draw_label("Trends in happiness levels for different emoloyee status from 1972 to 2021", 
+             fontface = "bold", 
+             size = 16,
+             x = 0.5,
+             y = 1.05)
+fig6
 ```
 
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-6PrettyHappyRace
-#| fig-cap: "Trends in happiness level (pretty happy) by race from 1972 to 2021"
-
-# calculate the count of individuals for pretty happy level
-race_data_happy2 <- race_data %>% 
-  filter(Happy == "Pretty happy") %>% 
-  group_by(Race, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-race_colors <- c("#3498DB", "#27AE60", "#F39C12")
-
-ggplot(race_data_happy2, aes(x = Year, y = People, fill = Race)) +
-  geom_line(aes(group = Race, color = Race), size = 1.2) +
-  scale_fill_manual(values = race_colors) +
-  scale_color_manual(values = race_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Fig6-Trends in happiness level (pretty happy) by race from 1972 to 2021")
-
-```
-
-
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-7NotTooHappyRace
-#| fig-cap: "Trends in happiness level (not too happy) by race from 1972 to 2021"
-
-# calculate the count of individuals for not too happy level
-race_data_happy3 <- race_data %>% 
-  filter(Happy == "Not too happy") %>% 
-  group_by(Race, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-race_colors <- c("#3498DB", "#27AE60", "#F39C12")
-
-ggplot(race_data_happy3, aes(x = Year, y = People, fill = Race)) +
-  geom_line(aes(group = Race, color = Race), size = 1.2) +
-  scale_fill_manual(values = race_colors) +
-  scale_color_manual(values = race_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Race", title = "Fig7-Trends in happiness level (not too happy) by race from 1972 to 2021")
-
-```
-
-
-
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-8LessHighSchool
-#| fig-cap: "Changes in happiness levels of individuals with less than high school education from 1972 to 2021"
-
-# calcualte the people who have less than high school degree based on different level of happy
-degree_data_1 <- degree_data %>% 
-  filter(Degree == "Less than high school") %>% 
-  group_by(Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-degree_colors <- c("#E74C3C", "#F1C40F", "#8E44AD")
-
-
-ggplot(degree_data_1, aes(x = Year, y = People, fill = Happy)) +
-  geom_line(aes(group = Happy, color = Happy), size = 1.2) +
-  scale_fill_manual(values = degree_colors) +
-  scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig8-Changes in happiness levels of individuals \nwith less than high school education from 1972 to 2021", color = "Happy level")
-
-```
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-9HighSchool
-#| fig-cap: "Changes in happiness levels of individuals with high school education from 1972 to 2021"
-
-# calcualte the people who have high school degree based on different level of happy
-degree_data_2 <- degree_data %>% 
-  filter(Degree == "High school") %>% 
-  group_by(Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-degree_colors <- c("#E74C3C", "#F1C40F", "#8E44AD")
-
-ggplot(degree_data_2, aes(x = Year, y = People, fill = Happy)) +
-  geom_line(aes(group = Happy, color = Happy), size = 1.2) +
-  scale_fill_manual(values = degree_colors) +
-  scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig9-Changes in happiness levels of individuals \nwith high school education from 1972 to 2021", color = "Happy level")
-
-```
-
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-10AssociateCollege
-#| fig-cap: "Changes in happiness levels of individuals with associate/junior college education from 1972 to 2021"
-
-# calcualte the people who have associate/junior college degree based on different level of happy
-degree_data_3 <- degree_data %>% 
-  filter(Degree == "Associate/junior college") %>% 
-  group_by(Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-degree_colors <- c("#E74C3C", "#F1C40F", "#8E44AD")
-
-ggplot(degree_data_3, aes(x = Year, y = People, fill = Happy)) +
-  geom_line(aes(group = Happy, color = Happy), size = 1.2) +
-  scale_fill_manual(values = degree_colors) +
-  scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig10-Changes in happiness levels of individuals \nwith associate/junior college education from 1972 to 2021", color = "Happy level")
-```
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-11Bachelor
-#| fig-cap: "Changes in happiness levels of individuals with bachelor's education from 1972 to 2021"
-
-# calcualte the people who have Bachelor's degree based on different level of happy
-degree_data_4 <- degree_data %>% 
-  filter(Degree == "Bachelor's") %>% 
-  group_by(Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-degree_colors <- c("#E74C3C", "#F1C40F","#8E44AD")
-
-ggplot(degree_data_4, aes(x = Year, y = People, fill = Happy)) +
-  geom_line(aes(group = Happy, color = Happy), size = 1.2) +
-  scale_fill_manual(values = degree_colors) +
-  scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig11-Changes in happiness levels of individuals \nwith bachelor's education from 1972 to 2021", color = "Happy level")
-
-```
-
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-12Graduate
-#| fig-cap: "Changes in happiness levels of individuals with graduate education from 1972 to 2021"
-
-# calcualte the people who have graduate degree based on different level of happy
-degree_data_5 <- degree_data %>% 
-  filter(Degree == "Graduate") %>% 
-  group_by(Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-degree_colors <- c("#E74C3C", "#F1C40F","#8E44AD")
-
-ggplot(degree_data_5, aes(x = Year, y = People, fill = Happy)) +
-  geom_line(aes(group = Happy, color = Happy), size = 1.2) +
-  scale_fill_manual(values = degree_colors) +
-  scale_color_manual(values = degree_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Happy level", title = "Fig12-Changes in happiness levels of individuals \nwith graduate education from 1972 to 2021", color = "Happy level")
-
-```
-
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-13EmployeeStatusVeryHappy
-#| fig-cap: "Trends in happiness level (very happy) by employee status from 1972 to 2021"
-
-# calcualte the number of employee status for very happy
-employee_status_data_happy1 <- employee_status_data %>% 
-  filter(Happy == "Very happy") %>% 
-  group_by(Employee_status, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-employee_status_colors <- c("#E74C3C", "#2C3E50")
-
-ggplot(employee_status_data_happy1, aes(x = Year, y = People, fill = Employee_status)) +
-  geom_line(aes(group = Employee_status, color = Employee_status), size = 1.2) +
-  scale_fill_manual(values = employee_status_colors) +
-  scale_color_manual(values = employee_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Fig13-Trends in happiness level (very happy) by employee status from 1972 to 2021", color = "Employee status")
-
-```
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-14EmployeeStatusPrettyHappy
-#| fig-cap: "Trends in happiness level (pretty happy) by employee status from 1972 to 2021"
-
-# calcualte the number of employee status for pretty happy
-employee_status_data_happy2 <- employee_status_data %>% 
-  filter(Happy == "Pretty happy") %>% 
-  group_by(Employee_status, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-employee_status_colors <- c("#E74C3C", "#2C3E50")
-
-ggplot(employee_status_data_happy2, aes(x = Year, y = People, fill = Employee_status)) +
-  geom_line(aes(group = Employee_status, color = Employee_status), size = 1.2) +
-  scale_fill_manual(values = employee_status_colors) +
-  scale_color_manual(values = employee_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Fig14-Trends in happiness level (pretty happy) by employee status from 1972 to 2021", color = "Employee status")
-```
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-15EmployeeStatusNotTooHappy
-#| fig-cap: "Trends in happiness level (not too happy) by employee status from 1972 to 2021"
-
-# calcualte the number of employee status for not to happy
-employee_status_data_happy3 <- employee_status_data %>% 
-  filter(Happy == "Not too happy") %>% 
-  group_by(Employee_status, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-employee_status_colors <- c("#E74C3C", "#2C3E50")
-
-ggplot(employee_status_data_happy3, aes(x = Year, y = People, fill = Employee_status)) +
-  geom_line(aes(group = Employee_status, color = Employee_status), size = 1.2) +
-  scale_fill_manual(values = employee_status_colors) +
-  scale_color_manual(values = employee_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Employee status", title = "Fig15-Trends in happiness level (not too happy) by employee status from 1972 to 2021", color = "Employee status")
-```
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-16MaritalStatusVeryHappy
-#| fig-cap: "Trends in Happiness Level (very happy) by Marital Status from 1972 to 2021"
-
-# calcualte the number of marital status for very happy
-marital_status_data_happy1 <- marital_status_data %>% 
-  filter(Happy == "Very happy") %>% 
-  group_by(Marital_status, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-marital_status_colors <- c("#E74C3C", "#F1C40F","#2ECC71","#3498DB","#8E44AD")
-
-ggplot(marital_status_data_happy1, aes(x = Year, y = People, fill = Marital_status)) +
-  geom_line(aes(group = Marital_status, color = Marital_status), size = 1.2) +
-  scale_fill_manual(values = marital_status_colors) +
-  scale_color_manual(values = marital_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Fig16-Trends in happiness level (very happy) by marital status from 1972 to 2021", color = "Marital status")
-```
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-17MaritalStatusPrettyHappy
-#| fig-cap: "Trends in happiness level (pretty happy) by marital status from 1972 to 2021"
-
-# calcualte the number of marital status for pretty happy
-marital_status_data_happy2 <- marital_status_data %>% 
-  filter(Happy == "Pretty happy") %>% 
-  group_by(Marital_status, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-marital_status_colors <- c("#E74C3C", "#F1C40F","#2ECC71","#3498DB","#8E44AD")
-
-ggplot(marital_status_data_happy2, aes(x = Year, y = People, fill = Marital_status)) +
-  geom_line(aes(group = Marital_status, color = Marital_status), size = 1.2) +
-  scale_fill_manual(values = marital_status_colors) +
-  scale_color_manual(values = marital_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Fig17-Trends in happiness level (pretty happy) by marital status from 1972 to 2021", color = "Marital status")
-```
-
-```{r}
-#| message: false
-#| warning: false
-#| echo: false
-#| label: fig-18MaritalStatusNotTooHappy
-#| fig-cap: "Trends in happiness level (not too happy) by marital status from 1972 to 2021"
-
-# calcualte the number of marital status for not too happy
-marital_status_data_happy3 <- marital_status_data %>% 
-  filter(Happy == "Not too happy") %>% 
-  group_by(Marital_status, Year, Happy) %>% 
-  summarize(People = n())
-
-# generate graph
-marital_status_colors <- c("#E74C3C", "#F1C40F","#2ECC71","#3498DB","#8E44AD")
-
-ggplot(marital_status_data_happy3, aes(x = Year, y = People, fill = Marital_status)) +
-  geom_line(aes(group = Marital_status, color = Marital_status), size = 1.2) +
-  scale_fill_manual(values = marital_status_colors) +
-  scale_color_manual(values = marital_status_colors) +
-  labs(x = "Year", y = "Number of respondents", fill = "Marital status", title = "Fig18-Trends in happiness level (not too happy) by marital status from 1972 to 2021", color = "Marital status")
-```
-
-```{r}
-
-```
 
 
 

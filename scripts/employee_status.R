@@ -20,13 +20,13 @@ library(reshape2)
 raw_data<-read.csv(here::here("outputs/data/raw_data.csv")) 
 
 # extract the income and race columns
-employee_status_data <- raw_data[, c("Employee_status","Happy","Year")]
+employee_status_data <- raw_data[, c("Employee_status","Happy_level","Year")]
 
 # replace the employee status code 
 Employee_status_replacements <- c("Self-employed", "Someone else")
 employee_status_data$Employee_status <- ifelse(employee_status_data$Employee_status == 1, 
-                                               employee_status_replacements[1],
-                                               employee_status_replacements[2])
+                                               Employee_status_replacements[1],
+                                               Employee_status_replacements[2])
 
 # replace the happy code
 happy_replacements <- c("Very happy", "Pretty happy","Not too happy")

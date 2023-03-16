@@ -20,7 +20,7 @@ library(reshape2)
 raw_data<-read.csv(here::here("outputs/data/raw_data.csv")) 
 
 # extract the income and race columns
-race_data <- raw_data[, c("Race", "Happy","Year")]
+race_data <- raw_data[, c("Race", "Happy_level","Year")]
 
 # replace the race code 
 race_replacements <- c("White", "Black","Others")
