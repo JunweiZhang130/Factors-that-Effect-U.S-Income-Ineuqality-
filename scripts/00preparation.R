@@ -45,7 +45,7 @@ raw_data <-
     Degree = degree,
     Marital_status = marital,
     Sex = sex,
-    Employee_status = wrkslf,
+    Employee_type = wrkslf,
   )
 
 # Save dat

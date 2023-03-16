@@ -12,9 +12,9 @@ set.seed(123)
 # Create vectors for each column
 year <- sample(1972:2021, 300, replace = TRUE)
 happy_level <- rep(1:3, length.out = 300)
-employee_status <- sample(c("Self-employed", "Someone else" ), 300, replace = TRUE)
+employee_type <- sample(c("Self-employed", "Someone else" ), 300, replace = TRUE)
 
 # Combine vectors into a tibble
-simulated_data_employee_status <- tibble(year, happy_level, employee_status)
+simulated_data_employee_type <- tibble(year, happy_level, employee_type)
 
-head(simulated_data_employee_status)
+head(simulated_data_employee_type)

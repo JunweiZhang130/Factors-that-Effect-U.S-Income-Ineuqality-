@@ -15,7 +15,6 @@ bibliography: references.bib
 ---
 
 
-
 # Introduction
 
 You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
@@ -74,7 +73,6 @@ fig1 <- fig1  +
              size = 12,
              x = 0.5,
              y = 1.05)
-fig1
 ```
 
 ```{r, fig.height=6}
@@ -122,7 +120,6 @@ fig2 <- fig2  +
              size = 16,
              x = 0.5,
              y = 1.05)
-fig2
 ```
 
 
@@ -184,8 +181,6 @@ fig3 <- fig3  +
              size = 16,
              x = 0.5,
              y = 1.05)
-fig3
-
 ```
 
 ```{r, fig.height=16}
@@ -269,7 +264,6 @@ fig4 <- fig4  +
              size = 16,
              x = 0.5,
              y = 1.05)
-fig4
 ```
 
 
@@ -319,7 +313,6 @@ fig5 <- fig5  +
              size = 16,
              x = 0.5,
              y = 1.05)
-fig5
 ```
 
 
@@ -406,7 +399,6 @@ fig6 <- fig6  +
              size = 16,
              x = 0.5,
              y = 1.05)
-fig6
 ```
 
 
