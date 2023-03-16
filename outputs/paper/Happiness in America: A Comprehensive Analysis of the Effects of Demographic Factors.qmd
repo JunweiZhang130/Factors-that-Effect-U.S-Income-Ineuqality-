@@ -1,23 +1,30 @@
 ---
-title: "Happiness in America: A Comprehensive Analysis of the Effects of Demographic Factors"
+title: "Happiness in US "
+subtitle: "Analysis of the Effects of Demographic Factors during 1972 to 2021"
 author: 
   - Rae Zhang
   - Faustine Fan
   - Myra Li
-thanks: "Code and data are available at: https://github.com/JunweiZhang130/Happiness-in-America-A-Comprehensive-Analysis-of-the-Effects-of-Demographic-Factors.git."
+thanks: "Code and data are available at: LINK."
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
 bibliography: references.bib
-
 ---
-
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
+This analysis aims to gain a deeper understanding of the overall well-being and quality of life of people living in the United States by exploring the factors that contribute to happiness. While happiness is a subjective and personal concept, its impact on society is objective and significant. Identifying the factors that contribute to happiness is crucial for policymakers and individuals alike in making informed decisions that improve the quality of life for everyone.                
+To achieve this, we focus on three main research questions:                 
+1) What are the trends of levels of happiness through the years 1972 to 2021?        
+2) What are the significant factors that affect the level of happiness people feel in society?                  
+3) How do these factors contribute to the trend of the levels of happiness through the years 1972 to 2021?              
+We hypothesize that factors such as education, social isolation, and work status will have an average impact on happiness levels, while demographic features such as race and gender will have a lesser impact.              
+To provide readers with necessary background information, Section 2 outlines the survey data and collection methodology. In Section 3, the report presents the insights derived from analyzing the data. Section 4 provides a summary of the findings and outlines plans for further exploration of the dataset.                  
+Understanding the root causes of different levels of happiness can help policymakers and society develop effective strategies to improve citizens' quality of life. This analysis aims to provide valuable guidance for individuals to improve their satisfaction with life.          
+
 
 # Methodology
 
@@ -45,7 +52,7 @@ happiness_data<-read.csv(here::here("outputs/data/happiness_data.csv"))
 sex_data<-read.csv(here::here("outputs/data/sex_data.csv"))
 race_data<-read.csv(here::here("outputs/data/race_data.csv"))
 degree_data<-read.csv(here::here("outputs/data/degree_data.csv"))
-employee_status_data<-read.csv(here::here("outputs/data/employee_status_data.csv"))
+employee_type_data<-read.csv(here::here("outputs/data/employee_status_data.csv"))
 marital_status_data<-read.csv(here::here("outputs/data/marital_status_data.csv"))
 
 ```
@@ -273,10 +280,10 @@ fig4 <- fig4  +
 #| warning: false
 #| echo: false
 #| label: fig-5Employee
-#| fig-cap: "Trends in happiness levels for different emoloyee status from 1972 to 2021"
+#| fig-cap: "Trends in happiness levels for different emoloyee type from 1972 to 2021"
 
 # graph for self-employee
-self_data <- filter(employee_status_data, Employee_status == "Self-employed")
+self_data <- filter(employee_type_data, Employee_type == "Self-employed")
 gself<- ggplot(self_data, 
              aes(y = Year, 
                  fill = Happy_level)) + 
@@ -288,7 +295,7 @@ gself<- ggplot(self_data,
            color = "Happy level")
 
 # graph for someone else
-someone_data <- filter(employee_status_data, Employee_status == "Someone else")
+someone_data <- filter(employee_type_data, Employee_type == "Someone else")
 gsomeone <- ggplot(someone_data, 
              aes(y = Year, 
                  fill = Happy_level)) + 

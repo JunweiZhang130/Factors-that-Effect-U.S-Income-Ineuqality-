@@ -1,4 +1,4 @@
-"Race","Year","Happy_level","Degree","Employee_status","Marital_status","Sex"
+"Race","Year","Happy_level","Degree","Employee_type","Marital_status","Sex"
 1,1972,3,3,2,5,2
 1,1972,3,0,2,1,1
 1,1972,2,1,2,1,2

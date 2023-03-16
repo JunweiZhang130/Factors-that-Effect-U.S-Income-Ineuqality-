@@ -20,8 +20,7 @@ library(ggplot2)
 raw_data<-read_dta(here::here("inputs/data/gss7221_r3b.dta"))
 
 # Select only certain columns
-raw_data <-
-  data |>
+raw_data <- raw_data %>%
   select(
     race,
     year,
@@ -41,7 +40,7 @@ raw_data <-
   rename(
     Race = race,
     Year = year,
-    Happy = happy,
+    Happy_level = happy,
     Degree = degree,
     Marital_status = marital,
     Sex = sex,
