@@ -1,16 +1,17 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Happiness in America: A Comprehensive Analysis of the Effects of Demographic Factors"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
+  - Rae Zhang
+  - Faustine Fan
+  - Myra Li
+thanks: "Code and data are available at: https://github.com/JunweiZhang130/Happiness-in-America-A-Comprehensive-Analysis-of-the-Effects-of-Demographic-Factors.git."
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
 bibliography: references.bib
+
 ---
 
 
