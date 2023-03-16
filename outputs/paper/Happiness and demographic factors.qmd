@@ -53,10 +53,10 @@ To conduct this analysis, we utilized the R programming language [@citeR] and va
 
 
 ## Survey Frame and Weakness
-Our survey has been carefully edited to improve upon existing questions from the original questionnaire and to add new questions that better capture the happiness of people in the USA. Specifically, we have addressed potential biases in questions and expanded the options to provide a more detailed exploration of the relationship between race and happiness. Additionally, we have added questions that focus on employment situations, income, COVID-19, mental health, future life aspirations, sense of fulfilment, and attitudes towards happiness.
+Our survey has been carefully edited to improve upon existing questions from the original questionnaire and to add new questions that better capture the happiness of people in the US. Specifically, we have addressed potential biases in questions and expanded the options to provide a more detailed exploration of the relationship between race and happiness. Additionally, we have added questions that focus on employment situations, income, COVID-19, mental health, future life aspirations, sense of fulfilment, and attitudes towards happiness.
 
 
-We believe that our survey will provide a more comprehensive and nuanced understanding of the factors that contribute to happiness in the USA. By improving the survey questions, we hope to provide policymakers and individuals with valuable insights into how to improve overall well-being and foster a happier society.
+We believe that our survey will provide a more comprehensive and nuanced understanding of the factors that contribute to happiness in the US. By improving the survey questions, we hope to provide policymakers and individuals with valuable insights into how to improve overall well-being and foster a happier society.
 
 
 ## Strength and Weakness of Dataset 
