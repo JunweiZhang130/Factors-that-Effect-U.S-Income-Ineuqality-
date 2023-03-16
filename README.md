@@ -22,7 +22,8 @@ The outputs folder coontains data file, paper file and survey file.
 Since we don't have the permission of sharing GSS data, we included our precleaning data as the raw_data.csv. This file includes all data we used in this paper. And the other files are the cleaned data for figures based on different demographic factors.                           
 
 ##### Paper File              
-The .bib file contains the citations for the raw data, packages and literature used in the report.
+The .bib file contains the citations for the raw data, packages and literature used in the report.           
+
 The rmd file contains the analysis report, as well as the code used to create the report. This code was mainly used to create tables and graphs.               
 The pdf file contains the same analysis report but in pdf form, and without the code. 
 

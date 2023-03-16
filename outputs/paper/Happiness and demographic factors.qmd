@@ -168,7 +168,7 @@ gfemale <- ggplot(female_data,
   geom_bar(position = "fill") + 
   theme_classic() +
   coord_flip()+
-  labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
+  labs(x = "Percentage", y = "Year", fill = "Happy Level", 
        title = "Female",
        color = "Happy level")
 
@@ -180,7 +180,7 @@ gmale <- ggplot(male_data,
   geom_bar(position = "fill") + 
   theme_classic() +
   coord_flip()+
-  labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
+  labs(x = "Percentage", y = "Year", fill = "Happy Level", 
        title = "Male",
        color = "Happy level")
 
@@ -553,7 +553,7 @@ Moving forward, there are several ways to expand on this study and enhance our u
 In addition, it would be valuable to compare our findings with those from other research papers that use national surveys in different countries to validate our conclusions and identify potential differences across regions. This could help us gain a more comprehensive understanding of the factors that contribute to income inequality on a global scale. By continuing to build on this research, we can work towards creating more equitable societies and improving the quality of life for individuals across the world.
 
 \newpage
-# Appendix
+# Appendix {-}
 A link to our survey exploring what will affect happiness in US can be found in the footnotes below.^[https://forms.gle/ZAoN1uFc9Gc24anh8]
 And you can access our survey through the QR code below.
 
@@ -570,4 +570,4 @@ knitr::include_graphics(here::here("outputs/survey/survey_5.png"))
 knitr::include_graphics(here::here("outputs/survey/survey_6.png"))
 ```
 {{< pagebreak >}}
-## References
+# Reference {-}
