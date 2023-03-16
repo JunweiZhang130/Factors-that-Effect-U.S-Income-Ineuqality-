@@ -5,10 +5,10 @@ author:
   - Rae Zhang
   - Faustine Fan
   - Myra Li
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/JunweiZhang130/Happiness-in-US-Analysis-of-the-Effects-of-Demographic-Factors-during-1972-to-2021.git"
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This essay explores the trends of happiness in the United States from 1972 to 2021 and identifies the significant factors that affect happiness levels. The report is based on the data gathered in US General Social Survey, and it investigates the impact of demographic features like sex, race, marital status, education, and employment types on happiness levels. The report hypothesizes that education, social isolation, and work status have a more significant impact on happiness levels than demographic features like race and gender. The COVID-19 pandemic has had overall negative effects on happiness levels. The report concludes that understanding the roots of different levels of happiness can help policymakers and society develop effective strategies to improve the quality of life for everyone."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -132,8 +132,7 @@ fig1 <- ggplot(happiness_data, aes(x = Year, y = People, fill = Happy_level)) +
   scale_fill_manual(values = happy_colors) +
   scale_color_manual(values = happy_colors) +
   labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
-       color = "Happy level")
-fig1 <- fig1  +
+       color = "Happy level") +
   draw_label("Trends in happiness levels for different genders from 1972 to 2021", 
              fontface = "bold", 
              size = 12,
@@ -141,6 +140,7 @@ fig1 <- fig1  +
              y = 1.05)
 fig1
 ```
+
 Over the past five decades, @fig-1Happiness shows there has been an overall increase in happiness levels in the United States, though with significant fluctuations. Further analysis of this trend reveals that happiness is influenced by various factors, such as macroeconomic conditions, social changes, and personal circumstances.
 
 
@@ -151,9 +151,9 @@ However, the global financial crisis and recession of 2007-2009 resulted in anot
  
  
 We will examine how demographic factors such as sex, race, marital status, degree, and employment status influence happiness and why as follow.
+\newpage
 
 ## Sex
-
 ```{r, fig.height=6}
 #| message: false
 #| warning: false
@@ -202,6 +202,7 @@ fig2 <- fig2  +
 
 fig2
 ```
+
 In this analysis, we examined @fig-2Gender, which compares the proportion of different education levels for each sex group from 1972 to 2021. We observed that the distribution of overall happiness levels remains consistent over time, with "pretty happy" being the most common response for both male and female groups.
 
 
@@ -211,11 +212,6 @@ A slight difference was noted in the mid-1970s, where the female group appeared 
 It is worth noting that our analysis is limited to the data presented in the figures, and further investigation may be required to understand any potential underlying factors contributing to these trends.
 
 ## Race
-In @fig-3Race, we present the trends in happiness levels among different racial groups in America from 1972 to 2021. The figure shows that white people consistently report higher levels of happiness than other racial groups over the period, although this could be due to survivorship bias as the majority of respondents in the GSS dataset are white. It is important to note that all racial groups have become less happy in 2021, possibly due to the COVID-19 pandemic.
-
-
-Notably, the figure shows that black people have experienced drops in happiness levels in specific years, including 1980, 2008, and 2021. These drops in happiness levels may reflect the impact of significant events or social phenomena that occurred during those years and that disproportionately affected the happiness of the black race. Further research may be needed to explore the reasons for these trends and to determine the extent to which they are influenced by factors such as racism, economic inequality, and political events.
-
 ```{r, fig.height=8}
 #| message: false
 #| warning: false
@@ -276,11 +272,15 @@ fig3 <- fig3  +
 
 fig3
 ```
+In @fig-3Race (next page), we present the trends in happiness levels among different racial groups in America from 1972 to 2021. The figure shows that white people consistently report higher levels of happiness than other racial groups over the period, although this could be due to survivorship bias as the majority of respondents in the GSS dataset are white. It is important to note that all racial groups have become less happy in 2021, possibly due to the COVID-19 pandemic.
+
+
+Notably, the figure shows that black people have experienced drops in happiness levels in specific years, including 1980, 2008, and 2021. These drops in happiness levels may reflect the impact of significant events or social phenomena that occurred during those years and that disproportionately affected the happiness of the black race. Further research may be needed to explore the reasons for these trends and to determine the extent to which they are influenced by factors such as racism, economic inequality, and political events.
+\newpage
 
 ## Degree
-The trends in happiness levels across different education groups from 1972 to 2021 are presented in @fig-4Degree. It can be observed that individuals with a graduate and above education experience report the lowest levels of the "not too happy" response option and have the highest proportion of respondents selecting the "very happy" option across the years. Conversely, individuals with less than a high school education have the highest proportion of respondents selecting the "not too happy" response option among the different education groups over the years.
-
-```{r, fig.height=16}
+The trends in happiness levels across different education groups from 1972 to 2021 are presented in @fig-4Degree (next page). It can be observed that individuals with a graduate and above education experience report the lowest levels of the "not too happy" response option and have the highest proportion of respondents selecting the "very happy" option across the years. Conversely, individuals with less than a high school education have the highest proportion of respondents selecting the "not too happy" response option among the different education groups over the years.
+```{r, fig.height=12}
 #| message: false
 #| warning: false
 #| echo: false
@@ -364,12 +364,14 @@ fig4 <- fig4  +
 
 fig4
 ```
+\newpage
+
 
 ## Employee Type
 In general, there may not be significant differences between being self-employed or being employed by someone else in terms of overall trends and distribution. However, upon closer examination of @fig-5Employee, it becomes apparent that self-employed individuals tend to report higher levels of happiness than those who are employed by others. This could be attributed to several factors, such as the flexibility of their work schedule, the ability to reduce commute time, and fewer relationship issues. Overall, these benefits may contribute to a greater sense of control over one's work and personal life, which can positively impact overall happiness levels.
 
 
-```{r, fig.height=8}
+```{r, fig.height=5}
 #| message: false
 #| warning: false
 #| echo: false
@@ -417,8 +419,14 @@ fig5 <- fig5  +
 
 fig5
 ```
+\newpage
 
 ## Marital Status 
+@fig-6Marital (next page) indicates that married individuals are more likely to report higher levels of happiness, with a greater proportion of respondents selecting "Pretty happy" and "Very happy" compared to those in other marital status categories. Interestingly, the proportion of respondents selecting "Very happy" in other groups is comparatively lower. Additionally, the distribution of happiness levels in the married group appears to be more stable and consistent over time compared to the other groups.
+
+
+It is worth noting that the COVID-19 pandemic had a significant impact on people's happiness levels, and married people’s level of happiness was more stable during this time. This may be attributed to the stability and security that marriage can provide during times of uncertainty. 
+
 ```{r, fig.height=16}
 #| message: false
 #| warning: false
@@ -503,58 +511,56 @@ fig6 <- fig6  +
 
 fig6
 ```
-@fig-6Marital indicates that married individuals are more likely to report higher levels of happiness, with a greater proportion of respondents selecting "Pretty happy" and "Very happy" compared to those in other marital status categories. Interestingly, the proportion of respondents selecting "Very happy" in other groups is comparatively lower. Additionally, the distribution of happiness levels in the married group appears to be more stable and consistent over time compared to the other groups.
-
-
-It is worth noting that the COVID-19 pandemic had a significant impact on people's happiness levels, and married people’s level of happiness was more stable during this time. This may be attributed to the stability and security that marriage can provide during times of uncertainty. 
-
-
-
-
-```{r}
-
-```
-
-```{r}
-
-```
+\newpage
+ 
 
 # Discussion
 ## Race and Levels of Happiness 
 Upon analyzing @fig-2Gender, we observed that the overall distribution of happiness levels appears to be similar across different racial groups. However, there was a significant increase in the proportions of happiness levels reported by individuals identifying as Black or belonging to other racial groups during 1970 to 1990. This suggests that race identity may potentially influence people's happiness levels within a society. Individuals from diverse racial and ethnic groups may experience varying degrees of social and economic disadvantage, discrimination, and prejudice, which can impact their overall sense of well-being and happiness, leading to a major decrease or increase in self-reported happiness levels.
 
 
-Research has shown that individuals who identify as racial minorities often experience more stress and lower levels of life satisfaction than those who identify as members of the dominant racial group (@FREDERICK20221). This can be due to factors such as experiences of racism, lack of representation in positions of power, and limited access to resources and opportunities. However, it is important to note that the impact of race identity on happiness is complex and multifaceted. The relationship between race and happiness can be influenced by factors such as social support, cultural identity, and personal values. Moreover, individual differences in personality, life circumstances, and coping strategies can also play a significant role in shaping the relationship between race identity and happiness. Therefore, while race identity can be a relevant factor in determining people's level of happiness, it is important to consider the context and individual differences in any analysis of this relationship.
+Research (@FREDERICK20221) has shown that individuals who identify as racial minorities often experience more stress and lower levels of life satisfaction than those who identify as members of the dominant racial group. This can be due to factors such as experiences of racism, lack of representation in positions of power, and limited access to resources and opportunities. However, it is important to note that the impact of race identity on happiness is complex and multifaceted. The relationship between race and happiness can be influenced by factors such as social support, cultural identity, and personal values. Moreover, individual differences in personality, life circumstances, and coping strategies can also play a significant role in shaping the relationship between race identity and happiness. Therefore, while race identity can be a relevant factor in determining people's level of happiness, it is important to consider the context and individual differences in any analysis of this relationship.
 
 ## Education levels and Happiness
+Diener et al. (@Diener2013UniversalsAC) argues that education may foster a sense of personal growth, autonomy, and purpose, which can contribute to overall life satisfaction . This conclusion matches our observation of @fig-4Degree. The plot shows that higher levels of education can have a significant impact on people's level of happiness in the US. Education can provide individuals with important skills, knowledge, and opportunities that can improve their well-being and quality of life. For example, individuals with higher levels of education may have better job prospects, higher income, and greater access to resources and social support networks. These factors can contribute to higher levels of life satisfaction and happiness. One interesting fact we noticed is, less portion of people were negatively affected by the covid-19 in those who have above university degree. Which shows the skills gathered from higher education have advantages to maintain people's emotions. 
+
+
+Education can provide individuals with important skills, knowledge, and opportunities that can improve their well-being and quality of life (@POWDTHAVEE201510). For example, individuals with higher levels of education tend to have better job prospects, higher income, and greater access to resources and social support networks. These factors can contribute to higher levels of life satisfaction and happiness.
+
+
+While our analysis suggests that education may have a positive impact on happiness levels, it is important to note that this relationship is not deterministic, and individual differences play a significant role in shaping one's happiness. As shown in @fig-3Race, even within the group of individuals with the highest level of education, there are still a significant number of respondents in every group selected "Not very happy" on the happiness scale. While education may contribute to higher levels of happiness, it is important to consider the complexity of this relationship and to recognize that happiness is a multifaceted construct that is influenced by a range of factors. This highlights the fact that education is not a guarantee of shaping one's sense of well-being. 
+
 
 ## Marital Status and level of Happiness
+@fig-6Marital illustrates the relationship between marital status and happiness levels, showing that being married or in a committed relationship is associated with higher levels of life satisfaction and happiness compared to those who are single or divorced. 
+
+
+There are several factors that may explain the relationship between marital status and happiness. Marital status plays a significant role in increasing happiness levels, as married people have more stable sexual partners (@MoneySexnHappiness). Marriage or a committed relationship can provide individuals with levels that may reflect the impact of significant events or social phenomena that social support, companionship, and a sense of belonging, which can contribute to feelings of happiness and well-being. Additionally, being in a stable and supportive relationship can provide individuals with a sense of security and stability that may contribute to their overall happiness.
+
 
 ## Weakness 
-
-##Next Steps
-
+One potential weakness of this paper is that the data used may not show all the responses to the survey row by row. Additionally, the dataset only represents responses from the United States, which limits its generalizability to countries with vastly different cultural backgrounds, such as those in Asia or South America.
 
 
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this.
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
+Furthermore, as the number of responses can vary from year to year, it's possible that the results may not be entirely objective, and errors in the dataset could occur. As a result, the conclusions drawn from this paper may not accurately reflect the overall factors that contribute to income inequality in society, and the findings may not be applicable globally.
+It's important to keep in mind that the conclusions drawn from this paper are based solely on data from the United States and may not be representative of the world as a whole. Therefore, caution should be exercised when applying these findings to other countries or regions.
 
 
-\newpage
+## Next Steps
+When analyzing the relationship between marital status and happiness, it is important to consider the context and individual differences. Researchers should take into account factors such as the quality of the relationship, individual values and preferences, and other life circumstances that may impact one's level of happiness. By considering these factors, we can gain a more nuanced understanding of the relationship between marital status and happiness.
+Moving forward, there are several ways to expand on this study and enhance our understanding of income inequality. First, we encourage other researchers to replicate our study using the GSS data in the Github folder to test the validity and reliability of our findings. Additionally, we included a supplementary survey in appendix 1 that contains additional data we believe would be beneficial to this study. Collecting more data can enable us to conduct more in-depth research on the factors that contribute to income inequality using the GSS data.
 
-\appendix
+
+In addition, it would be valuable to compare our findings with those from other research papers that use national surveys in different countries to validate our conclusions and identify potential differences across regions. This could help us gain a more comprehensive understanding of the factors that contribute to income inequality on a global scale. By continuing to build on this research, we can work towards creating more equitable societies and improving the quality of life for individuals across the world.
 
 \newpage
 # Appendix
 A link to our survey exploring what will affect happiness in US can be found in the footnotes below.^[https://forms.gle/ZAoN1uFc9Gc24anh8]
+And you can access our survey through the QR code below.
+
+```{r, echo=FALSE, out.width="30%"}
+knitr::include_graphics(here::here("outputs/survey/QR_code.png"))
+```
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics(here::here("outputs/survey/survey_1.png"))
@@ -564,8 +570,5 @@ knitr::include_graphics(here::here("outputs/survey/survey_4.png"))
 knitr::include_graphics(here::here("outputs/survey/survey_5.png"))
 knitr::include_graphics(here::here("outputs/survey/survey_6.png"))
 ```
-# Additional details
-
-\newpage
-
-# References
+{{< pagebreak >}}
+## References
