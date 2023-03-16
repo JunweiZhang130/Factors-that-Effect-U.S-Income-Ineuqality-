@@ -16,14 +16,17 @@ The repository is organised as follows:
 we removed the raw data since we don't have the permission. If you choose to download the raw data from GSS, please store it in here (inputs/data)                
 
 ## outputs                   
-The outputs folder coontains data file and paper file.                 
+The outputs folder coontains data file, paper file and survey file.                 
 ##### data file                     
 Since we don't have the permission of sharing GSS data, we included our precleaning data as the raw_data.csv. This file includes all data we used in this paper. And the other files are the cleaned data for figures based on different demographic factors.                           
 
 ##### paper file              
 The .bib file contains the citations for the raw data, packages and literature used in the report.
 The rmd file contains the analysis report, as well as the code used to create the report. This code was mainly used to create tables and graphs.               
-The pdf file contains the same analysis report but in pdf form, and without the code.              
+The pdf file contains the same analysis report but in pdf form, and without the code. 
+
+##### survey file  
+This file contains the QR code to access our survey and screenshots of our survey.
 
 ## scripts            
 The Script folder contains data cleaning process for each graph, simulation for each graph and a test for all cleaned data.             
