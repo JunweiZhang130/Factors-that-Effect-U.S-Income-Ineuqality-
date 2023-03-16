@@ -1,6 +1,5 @@
 ---
-title: "Happiness in US"
-subtitle: "Analysis of the Effects of Demographic Factors during 1972 to 2021"
+title: "Happiness in US: Analysis of the Effects of Demographic Factors during 1972 to 2021"
 author: 
   - Rae Zhang
   - Faustine Fan
