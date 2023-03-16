@@ -9,12 +9,12 @@ Since we don't have the permission to share the GSS data, you can download the r
                                      
 The paper and the graphs are based on our cleaned data, so if you prefer not to review the raw data, that's not a problem.                  
 
-Then run the *references.bib* file (*outputs/paper*) for references and citations, after that run the *Happiness in the U.S: A Comprehensive Analysis of the Effects of Demographic Factors.qmd* file (outputs/paper).                     
+Then run the *references.bib* file (outputs/paper) for references and citations, after that run the *Happiness in the U.S: A Comprehensive Analysis of the Effects of Demographic Factors.qmd* file (outputs/paper).                     
 
 
 The repository is organised as follows:                  
 ## Inputs                
-we removed the raw data since we don't have the permission. If you choose to download the raw data from GSS, please store it in here (inputs/data)                
+We removed the raw data since we don't have the permission. If you choose to download the raw data from GSS, please store it in here (inputs/data)                
 
 ## Outputs                   
 The outputs folder coontains data file, paper file and survey file.                 
