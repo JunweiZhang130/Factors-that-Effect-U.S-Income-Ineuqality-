@@ -10,8 +10,10 @@ date-format: "D MMMM YYYY"
 abstract: "This essay explores the trends of happiness in the United States from 1972 to 2021 and identifies the significant factors that affect happiness levels. The report is based on the data gathered in US General Social Survey, and it investigates the impact of demographic features like sex, race, marital status, education, and employment types on happiness levels. The report hypothesizes that education, social isolation, and work status have a more significant impact on happiness levels than demographic features like race and gender. The COVID-19 pandemic has had overall negative effects on happiness levels. The report concludes that understanding the roots of different levels of happiness can help policymakers and society develop effective strategies to improve the quality of life for everyone."
 format: pdf
 number-sections: true
+toc: true
 bibliography: references.bib
 ---
+\newpage
 
 # Introduction
 
@@ -47,7 +49,7 @@ One of the unique features of the GSS is that it adapts questions from earlier s
 The use of the GSS dataset in our research provides a robust and nationally representative sample of Americans, allowing us to examine the relationship between education and life satisfaction. This data source is widely recognized in the academic community for its comprehensive coverage of contemporary American society and its long-term approach to monitoring public opinion trends.
 
 
-To conduct this analysis, we utilized the R programming language and various packages for data cleaning, exploration, and visualization. The raw data was obtained as a Stata file and imported into R using the Haven package. The dataset included responses from 60,092 survey participants to 568 survey questions. To clean and analyze the data, we used the tidyverse and dplyr packages. To visualize the data, we utilized the ggplot2 package.
+To conduct this analysis, we utilized the R programming language [@citeR] and various packages for data cleaning, exploration, and visualization. The raw data was obtained as a Stata file and imported into R using the haven [@haven] package. The dataset included responses from 60,092 survey participants to 568 survey questions. To clean and analyze the data, we used the tidyverse [@tidyverse], data table [@datatable] package, and dplyr [@dplyr] packages. To visualize the data, we utilized the ggplot2 [@ggplot2] package, scales [@scales] package. We used cowplot [@cowplot] package to group our graphs. And we used lubridate [@lubridate] package for auto-generated date.
 
 
 ## Survey Frame and Weakness
@@ -98,11 +100,9 @@ library(cowplot)
 library(tidyverse)
 library(dplyr, warn.conflicts = FALSE)
 library(tidyr)
-library(readxl)
 library(data.table)
 library(lubridate)
 library(haven)
-library(readxl)
 library(ggplot2)
 library(scales)
 
@@ -143,7 +143,7 @@ fig1
 Over the past five decades, @fig-1Happiness shows there has been an overall increase in happiness levels in the United States, though with significant fluctuations. Further analysis of this trend reveals that happiness is influenced by various factors, such as macroeconomic conditions, social changes, and personal circumstances.
 
 
-For instance, in the early 1990s, there was a considerable rise in happiness due to political and economic changes, such as the end of the Cold War, the emergence of neoliberalism, and the rise of a new Democratic Party (@ProtectingSoldiersandMothers). In contrast, the dot-com crash of the early 2000s led to a sharp decline in happiness levels that persisted until the economic recovery brought it back up to pre-crash levels.
+For instance, in the early 1990s, there was a considerable rise in happiness due to political and economic changes, such as the end of the Cold War, the emergence of neoliberalism, and the rise of a new Democratic Party [@ProtectingSoldiersandMothers]. In contrast, the dot-com crash of the early 2000s led to a sharp decline in happiness levels that persisted until the economic recovery brought it back up to pre-crash levels.
  
 
 However, the global financial crisis and recession of 2007-2009 resulted in another decrease in happiness, as it impacted people's quality of life. More recently, the COVID-19 pandemic has had both positive and negative effects on happiness levels. While social isolation and economic uncertainty have decreased happiness, increased family and leisure time have had positive effects.
@@ -518,13 +518,13 @@ fig6
 Upon analyzing @fig-2Gender, we observed that the overall distribution of happiness levels appears to be similar across different racial groups. However, there was a significant increase in the proportions of happiness levels reported by individuals identifying as Black or belonging to other racial groups during 1970 to 1990. This suggests that race identity may potentially influence people's happiness levels within a society. Individuals from diverse racial and ethnic groups may experience varying degrees of social and economic disadvantage, discrimination, and prejudice, which can impact their overall sense of well-being and happiness, leading to a major decrease or increase in self-reported happiness levels.
 
 
-Research (@FREDERICK20221) has shown that individuals who identify as racial minorities often experience more stress and lower levels of life satisfaction than those who identify as members of the dominant racial group. This can be due to factors such as experiences of racism, lack of representation in positions of power, and limited access to resources and opportunities. However, it is important to note that the impact of race identity on happiness is complex and multifaceted. The relationship between race and happiness can be influenced by factors such as social support, cultural identity, and personal values. Moreover, individual differences in personality, life circumstances, and coping strategies can also play a significant role in shaping the relationship between race identity and happiness. Therefore, while race identity can be a relevant factor in determining people's level of happiness, it is important to consider the context and individual differences in any analysis of this relationship.
+Research [@FREDERICK20221] has shown that individuals who identify as racial minorities often experience more stress and lower levels of life satisfaction than those who identify as members of the dominant racial group. This can be due to factors such as experiences of racism, lack of representation in positions of power, and limited access to resources and opportunities. However, it is important to note that the impact of race identity on happiness is complex and multifaceted. The relationship between race and happiness can be influenced by factors such as social support, cultural identity, and personal values. Moreover, individual differences in personality, life circumstances, and coping strategies can also play a significant role in shaping the relationship between race identity and happiness. Therefore, while race identity can be a relevant factor in determining people's level of happiness, it is important to consider the context and individual differences in any analysis of this relationship.
 
 ## Education levels and Happiness
-Diener et al. (@Diener2013UniversalsAC) argues that education may foster a sense of personal growth, autonomy, and purpose, which can contribute to overall life satisfaction . This conclusion matches our observation of @fig-4Degree. The plot shows that higher levels of education can have a significant impact on people's level of happiness in the US. Education can provide individuals with important skills, knowledge, and opportunities that can improve their well-being and quality of life. For example, individuals with higher levels of education may have better job prospects, higher income, and greater access to resources and social support networks. These factors can contribute to higher levels of life satisfaction and happiness. One interesting fact we noticed is, less portion of people were negatively affected by the covid-19 in those who have above university degree. Which shows the skills gathered from higher education have advantages to maintain people's emotions. 
+Diener et al. [@Diener2013UniversalsAC] argues that education may foster a sense of personal growth, autonomy, and purpose, which can contribute to overall life satisfaction . This conclusion matches our observation of @fig-4Degree. The plot shows that higher levels of education can have a significant impact on people's level of happiness in the US. Education can provide individuals with important skills, knowledge, and opportunities that can improve their well-being and quality of life. For example, individuals with higher levels of education may have better job prospects, higher income, and greater access to resources and social support networks. These factors can contribute to higher levels of life satisfaction and happiness. One interesting fact we noticed is, less portion of people were negatively affected by the covid-19 in those who have above university degree. Which shows the skills gathered from higher education have advantages to maintain people's emotions. 
 
 
-Education can provide individuals with important skills, knowledge, and opportunities that can improve their well-being and quality of life (@POWDTHAVEE201510). For example, individuals with higher levels of education tend to have better job prospects, higher income, and greater access to resources and social support networks. These factors can contribute to higher levels of life satisfaction and happiness.
+Education can provide individuals with important skills, knowledge, and opportunities that can improve their well-being and quality of life [@POWDTHAVEE201510]. For example, individuals with higher levels of education tend to have better job prospects, higher income, and greater access to resources and social support networks. These factors can contribute to higher levels of life satisfaction and happiness.
 
 
 While our analysis suggests that education may have a positive impact on happiness levels, it is important to note that this relationship is not deterministic, and individual differences play a significant role in shaping one's happiness. As shown in @fig-3Race, even within the group of individuals with the highest level of education, there are still a significant number of respondents in every group selected "Not very happy" on the happiness scale. While education may contribute to higher levels of happiness, it is important to consider the complexity of this relationship and to recognize that happiness is a multifaceted construct that is influenced by a range of factors. This highlights the fact that education is not a guarantee of shaping one's sense of well-being. 
@@ -534,7 +534,7 @@ While our analysis suggests that education may have a positive impact on happine
 @fig-6Marital illustrates the relationship between marital status and happiness levels, showing that being married or in a committed relationship is associated with higher levels of life satisfaction and happiness compared to those who are single or divorced. 
 
 
-There are several factors that may explain the relationship between marital status and happiness. Marital status plays a significant role in increasing happiness levels, as married people have more stable sexual partners (@MoneySexnHappiness). Marriage or a committed relationship can provide individuals with levels that may reflect the impact of significant events or social phenomena that social support, companionship, and a sense of belonging, which can contribute to feelings of happiness and well-being. Additionally, being in a stable and supportive relationship can provide individuals with a sense of security and stability that may contribute to their overall happiness.
+There are several factors that may explain the relationship between marital status and happiness. Marital status plays a significant role in increasing happiness levels, as married people have more stable sexual partners [@MoneySexnHappiness]. Marriage or a committed relationship can provide individuals with levels that may reflect the impact of significant events or social phenomena that social support, companionship, and a sense of belonging, which can contribute to feelings of happiness and well-being. Additionally, being in a stable and supportive relationship can provide individuals with a sense of security and stability that may contribute to their overall happiness.
 
 
 ## Weakness 
