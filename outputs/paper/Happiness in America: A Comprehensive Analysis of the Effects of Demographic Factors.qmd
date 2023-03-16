@@ -16,17 +16,41 @@ bibliography: references.bib
 
 # Introduction
 
-This analysis aims to gain a deeper understanding of the overall well-being and quality of life of people living in the United States by exploring the factors that contribute to happiness. While happiness is a subjective and personal concept, its impact on society is objective and significant. Identifying the factors that contribute to happiness is crucial for policymakers and individuals alike in making informed decisions that improve the quality of life for everyone.                
-To achieve this, we focus on three main research questions:                 
-1) What are the trends of levels of happiness through the years 1972 to 2021?        
-2) What are the significant factors that affect the level of happiness people feel in society?                  
-3) How do these factors contribute to the trend of the levels of happiness through the years 1972 to 2021?              
-We hypothesize that factors such as education, social isolation, and work status will have an average impact on happiness levels, while demographic features such as race and gender will have a lesser impact.              
-To provide readers with necessary background information, Section 2 outlines the survey data and collection methodology. In Section 3, the report presents the insights derived from analyzing the data. Section 4 provides a summary of the findings and outlines plans for further exploration of the dataset.                  
-Understanding the root causes of different levels of happiness can help policymakers and society develop effective strategies to improve citizens' quality of life. This analysis aims to provide valuable guidance for individuals to improve their satisfaction with life.          
+This analysis aims to gain a deeper understanding of the overall well-being and quality of life of people living in the United States by exploring the factors that contribute to happiness. While happiness is a subjective and personal concept, its impact on society is objective and significant. Identifying the factors that contribute to happiness is crucial for policymakers and individuals alike in making informed decisions that improve the quality of life for everyone.
 
 
-# Methodology
+To achieve this, we focus on three main research questions:
+
+
+1) What are the trends of levels of happiness through the years 1972 to 2021?
+
+
+2) What are the significant factors that affect the level of happiness people feel in society?
+
+
+3) How do these factors contribute to the trend of the levels of happiness through the years 1972 to 2021?
+
+
+We hypothesize that factors such as education, social isolation, and work status will have an average impact on happiness levels, while demographic features such as race and gender will have a lesser impact.
+
+
+To provide readers with necessary background information, Section 2 outlines the survey data and collection methodology. In Section 3, the report presents the insights derived from analyzing the data. Section 4 provides a summary of the findings and outlines plans for further exploration of the dataset.
+Understanding the root causes of different levels of happiness can help policymakers and society develop effective strategies to improve citizens' quality of life. This analysis aims to provide valuable guidance for individuals to improve their satisfaction with life.
+
+# Data 
+## Source and Methodology
+Our study is based on data collected from the US General Social Survey (GSS). The GSS is a nationally representative cross-sectional survey conducted since 1972, aimed at collecting data on contemporary American society to monitor and explain trends in opinions, attitudes, and behaviors.
+One of the unique features of the GSS is that it adapts questions from earlier surveys, enabling researchers to conduct comparisons for up to 80 years. Moreover, the GSS has taken great care to maintain survey methodology as comparable as possible over time, including keeping the same sampling approach and question wording. This approach helps to minimize potential changes due to variations in methodology and supports the study of trends in public opinion in the United States over time.
+
+
+The use of the GSS dataset in our research provides a robust and nationally representative sample of Americans, allowing us to examine the relationship between education and life satisfaction. This data source is widely recognized in the academic community for its comprehensive coverage of contemporary American society and its long-term approach to monitoring public opinion trends.
+
+
+To conduct this analysis, we utilized the R programming language and various packages for data cleaning, exploration, and visualization. The raw data was obtained as a Stata file and imported into R using the Haven package. The dataset included responses from 60,092 survey participants to 568 survey questions. To clean and analyze the data, we used the tidyverse and dplyr packages. To visualize the data, we utilized the ggplot2 package.
+
+
+The survey under consideration in this report is the General Social Survey, which has been conducted since 1972 by the NORC at the University of Chicago and funded by the National Science Foundation. The survey is designed to monitor public opinion and behavior in the United States and utilizes similar sampling and questioning approaches across its various rounds to ensure consistency. The GSS includes repeating modules and topical modules that may vary across rounds, and each participant is given a subset of these modules to respond to.
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -58,6 +82,7 @@ marital_status_data<-read.csv(here::here("outputs/data/marital_status_data.csv")
 ```
 
 # Results
+
 ```{r}
 #| message: false
 #| warning: false
@@ -128,8 +153,6 @@ fig2 <- fig2  +
              x = 0.5,
              y = 1.05)
 ```
-
-
 
 ```{r, fig.height=8}
 #| message: false
@@ -273,8 +296,6 @@ fig4 <- fig4  +
              y = 1.05)
 ```
 
-
-
 ```{r, fig.height=8}
 #| message: false
 #| warning: false
@@ -321,9 +342,6 @@ fig5 <- fig5  +
              x = 0.5,
              y = 1.05)
 ```
-
-
-
 
 ```{r, fig.height=16}
 #| message: false
@@ -408,13 +426,9 @@ fig6 <- fig6  +
              y = 1.05)
 ```
 
-
-
-
 ```{r}
 
 ```
-
 
 ```{r}
 
@@ -426,7 +440,7 @@ fig6 <- fig6  +
 
 ## First discussion point {#sec-first-point}
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this.
 
 ## Second discussion point
 
@@ -440,15 +454,10 @@ Weaknesses and next steps should also be included.
 
 \appendix
 
-# Appendix {-}
-
+# Appendix {.unnumbered}
 
 # Additional details
 
-
 \newpage
 
-
 # References
-
-
