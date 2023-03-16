@@ -61,8 +61,8 @@ marital_status_data<-read.csv(here::here("outputs/data/marital_status_data.csv")
 # generate graph
 happy_colors <- c("#FF7F00", "#1F78B4", "#33A02C")
 
-fig1 <- ggplot(happiness_data, aes(x = Year, y = People, fill = Happy)) +
-  geom_line(aes(group = Happy, color = Happy), size = 1.2) +
+fig1 <- ggplot(happiness_data, aes(x = Year, y = People, fill = Happy_level)) +
+  geom_line(aes(group = Happy_level, color = Happy_level), size = 1.2) +
   scale_fill_manual(values = happy_colors) +
   scale_color_manual(values = happy_colors) +
   labs(x = "Year", y = "Number of Respondents", fill = "Happy Level", 
@@ -137,7 +137,7 @@ fig2
 white_data <- filter(race_data, Race == "White")
 gwhite <- ggplot(white_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -149,7 +149,7 @@ gwhite <- ggplot(white_data,
 black_data <- filter(race_data, Race == "Black")
 gblack <- ggplot(black_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip()+
@@ -161,7 +161,7 @@ gblack <- ggplot(black_data,
 others_data <- filter(race_data, Race == "Others")
 gothers <- ggplot(others_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -198,7 +198,7 @@ fig3
 less_high_school_data <- filter(degree_data, Degree == "Less than high school")
 glesshighschool <- ggplot(less_high_school_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -210,7 +210,7 @@ glesshighschool <- ggplot(less_high_school_data,
 high_school_data <- filter(degree_data, Degree == "High school")
 ghighschool <- ggplot(high_school_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -222,7 +222,7 @@ ghighschool <- ggplot(high_school_data,
 junior_data <- filter(degree_data, Degree == "Associate/junior college")
 gjunior <- ggplot(junior_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -234,7 +234,7 @@ gjunior <- ggplot(junior_data,
 bachelor_data <- filter(degree_data, Degree == "Bachelor's")
 gbachelor <- ggplot(bachelor_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -246,7 +246,7 @@ gbachelor <- ggplot(bachelor_data,
 graduate_data <- filter(degree_data, Degree == "Graduate")
 graduate<- ggplot(graduate_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -284,7 +284,7 @@ fig4
 self_data <- filter(employee_status_data, Employee_status == "Self-employed")
 gself<- ggplot(self_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -296,7 +296,7 @@ gself<- ggplot(self_data,
 someone_data <- filter(employee_status_data, Employee_status == "Someone else")
 gsomeone <- ggplot(someone_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -335,7 +335,7 @@ fig5
 married_data <- filter(marital_status_data, Marital_status == "Married")
 gmarried_data <- ggplot(married_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -347,7 +347,7 @@ gmarried_data <- ggplot(married_data,
 widowed_data <- filter(marital_status_data, Marital_status == "Widowed")
 gwidowed_data <- ggplot(widowed_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -359,7 +359,7 @@ gwidowed_data <- ggplot(widowed_data,
 divorced_data <- filter(marital_status_data, Marital_status == "Divorced")
 gdivorced_data <- ggplot(divorced_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -371,7 +371,7 @@ gdivorced_data <- ggplot(divorced_data,
 separated_data <- filter(marital_status_data, Marital_status == "Separated")
 gseparated_data <- ggplot(separated_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +
@@ -383,7 +383,7 @@ gseparated_data <- ggplot(separated_data,
 never_married_data <- filter(marital_status_data, Marital_status == "Never married")
 gnever_married<- ggplot(never_married_data, 
              aes(y = Year, 
-                 fill = Happy)) + 
+                 fill = Happy_level)) + 
       geom_bar(position = "fill") + 
       theme_classic() +
       coord_flip() +

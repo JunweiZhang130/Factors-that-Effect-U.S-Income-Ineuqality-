@@ -30,8 +30,9 @@ employee_status_data$Employee_status <- ifelse(employee_status_data$Employee_sta
 
 # replace the happy code
 happy_replacements <- c("Very happy", "Pretty happy","Not too happy")
-employee_status_data$Happy <- ifelse(employee_status_data$Happy == 1, happy_replacements[1],
-                          ifelse(employee_status_data$Happy == 2, happy_replacements[2],
+employee_status_data$Happy_level <- ifelse(employee_status_data$Happy_level == 1, 
+                                           happy_replacements[1],
+                          ifelse(employee_status_data$Happy_level == 2, happy_replacements[2],
                                  happy_replacements[3]))
 
 # save the data frame as a csv file

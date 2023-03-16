@@ -34,8 +34,8 @@ degree_data$Degree <- ifelse(degree_data$Degree == 0, degree_replacements[1],
 
 # replace the happy code
 happy_replacements <- c("Very happy", "Pretty happy","Not too happy")
-degree_data$Happy <- ifelse(degree_data$Happy == 1, happy_replacements[1],
-                          ifelse(degree_data$Happy == 2, happy_replacements[2],
+degree_data$Happy_level <- ifelse(degree_data$Happy_level == 1, happy_replacements[1],
+                          ifelse(degree_data$Happy_level == 2, happy_replacements[2],
                                  happy_replacements[3]))
 
 # save the data frame as a csv file

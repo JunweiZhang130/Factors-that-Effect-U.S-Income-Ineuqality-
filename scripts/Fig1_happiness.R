@@ -20,17 +20,17 @@ library(reshape2)
 raw_data<-read.csv(here::here("outputs/data/raw_data.csv")) 
 
 # extract the income and race columns
-happiness_data <- raw_data[, c("Happy","Year")]
+happiness_data <- raw_data[, c("Happy_level","Year")]
 
 # replace the happy code
 happy_replacements <- c("Very happy", "Pretty happy","Not too happy")
-happiness_data$Happy <- ifelse(happiness_data$Happy == 1, happy_replacements[1],
-                         ifelse(happiness_data$Happy == 2, happy_replacements[2],
+happiness_data$Happy_level <- ifelse(happiness_data$Happy_level == 1, happy_replacements[1],
+                         ifelse(happiness_data$Happy_level == 2, happy_replacements[2],
                                 happy_replacements[3]))
 
 # calcualte the number of people by year
 happiness_data <- happiness_data %>% 
-  group_by(Year, Happy) %>% 
+  group_by(Year, Happy_level) %>% 
   summarize(People = n())
 
 # save the data frame as a csv file

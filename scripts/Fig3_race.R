@@ -30,8 +30,8 @@ race_data$Race <- ifelse(race_data$Race == 1, race_replacements[1],
 
 # replace the happy code
 happy_replacements <- c("Very happy", "Pretty happy","Not too happy")
-race_data$Happy <- ifelse(race_data$Happy == 1, happy_replacements[1],
-                         ifelse(race_data$Happy == 2, happy_replacements[2],
+race_data$Happy_level <- ifelse(race_data$Happy_level == 1, happy_replacements[1],
+                         ifelse(race_data$Happy_level == 2, happy_replacements[2],
                                 happy_replacements[3]))
 
 # save the data frame as a csv file
