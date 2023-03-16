@@ -1,4 +1,4 @@
-# Happiness in America: A Comprehensive Analysis of the Effects of Demographic Factors
+# Happiness-in-US-Analysis-of-the-Effects-of-Demographic-Factors-during-1972-to-2021
 
 This repository can be found at https://github.com/JunweiZhang130/Happiness-in-America-A-Comprehensive-Analysis-of-the-Effects-of-Demographic-Factors.git.   
 
