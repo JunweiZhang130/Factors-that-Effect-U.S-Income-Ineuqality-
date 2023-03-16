@@ -1,6 +1,6 @@
 # Happiness in US Analysis of the Effects of Demographic Factors during 1972 to 2021
 
-This repository can be found at https://github.com/JunweiZhang130/Happiness-in-America-A-Comprehensive-Analysis-of-the-Effects-of-Demographic-Factors.git.   
+This repository can be found at https://github.com/JunweiZhang130/Happiness-in-US-Analysis-of-the-Effects-of-Demographic-Factors-during-1972-to-2021.git    
 
 This repository presents an exploration of the relationship between demographic factors and happiness levels in America. And the data is obtained from the *US General Social Survey*.    
 
